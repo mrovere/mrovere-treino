@@ -3,71 +3,151 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Plano de Treino – 4 Etapas</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Plano de Treino – 4 Semanas</title>
+
+  <!-- Fonts modernas -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    :root{--azul:#4a90e2;--cinza:#f7f7f7;--borda:#d0d0d0;--cor-primaria: #6366f1;   /* Indigo (botões, destaques) */
-  --cor-secundaria: #06b6d4; /* Ciano */
-  --cor-fundo: #f9fafb;      /* cinza clarinho */
-  --cor-card: #ffffff;       
-  --cor-texto: #111827;      /* cinza quase preto */
-  --cor-borda: #e5e7eb;      /* cinza neutro */
-}
+    :root{
+      /* Paleta vibrante e “futurista” */
+      --bg-1:#0f1226;         /* fundo base escuro azulado */
+      --bg-2:#14183b;         /* fundo cards translúcidos */
+      --txt:#e6e9ff;          /* texto principal */
+      --muted:#b7bde6;        /* texto secundário */
+      --primary:#8b5cf6;      /* roxo elétrico */
+      --primary-2:#06b6d4;    /* ciano */
+      --accent:#22d3ee;       /* ciano claro */
+      --danger:#ff6b6b;
+      --glass:rgba(255,255,255,.08);
+      --border:rgba(255,255,255,.15);
+      --shadow: 0 8px 30px rgba(2,8,23,.35);
+      --radius:16px;
+    }
+
     *{box-sizing:border-box}
-body { background: var(--cor-fundo); color: var(--cor-texto); font-family: 'Inter', sans-serif; }
-    header{padding:14px;background:#fff;border-bottom:1px solid var(--borda);display:flex;gap:12px;align-items:center;justify-content:space-between}
-    h1{margin:0;font-size:1.15rem}
-    main{max-width:1100px;margin:22px auto;padding:0 16px}
-    .card { background: var(--cor-card); border: 1px solid var(--cor-borda); border-radius: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
-    table{width:100%;border-collapse:collapse}
-    th,td{border:1px solid #bbb;padding:8px;vertical-align:top}
-    th{background:var(--azul);color:#fff}
-    .btn {
-  background: var(--cor-primaria);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 16px;
-  cursor: pointer;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  transition: all 0.2s ease;
-}
-    .btn:disabled{opacity:.6;cursor:not-allowed}
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(99,102,241,0.3);
-}
-.btn-outline {
-  background: transparent;
-  color: var(--cor-primaria);
-  border: 1px solid var(--cor-primaria);
-}
-    .grid{display:grid;gap:12px}
-    .grid-2{grid-template-columns:1fr 1fr}
-    .grid-3{grid-template-columns:repeat(3,1fr)}
-    label{font-weight:600;margin-top:8px;display:block}
-    input,select,textarea{width:100%;padding:9px;border:1px solid #ccc;border-radius:6px;margin-top:6px}
-    textarea{min-height:90px}
-    .muted{color:#666;font-size:.9rem}
-    .activity{border-bottom:1px dashed #ddd;padding:8px 0}
-    .chip{display:inline-block;padding:3px 8px;border-radius:18px;background:#eef3ff;color:#2c5bbf;margin-right:6px;font-size:.85rem}
-    .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--txt);
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto;
+      background:
+        radial-gradient(1200px 800px at 10% -10%, #1b1f46 0%, transparent 60%),
+        radial-gradient(1200px 800px at 110% 10%, #0a373f 0%, transparent 50%),
+        linear-gradient(180deg,#0f1226 0%, #0b0e1f 100%);
+      background-attachment: fixed;
+    }
+
+    header{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(160%) blur(14px);
+      background:linear-gradient(90deg, rgba(139,92,246,.15), rgba(34,211,238,.12)) ;
+      border-bottom:1px solid var(--border);
+      padding:14px 16px;
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+    }
+    h1{margin:0; font-size:1.15rem; font-family:'Space Grotesk',sans-serif; letter-spacing:.3px}
+
+    main{max-width:1100px; margin:24px auto; padding:0 16px}
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px;
+      margin-bottom:22px;
+      box-shadow: var(--shadow);
+    }
+
+    table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px}
+    th,td{padding:10px; vertical-align:top}
+    th{
+      background:linear-gradient(90deg, rgba(139,92,246,.35), rgba(34,211,238,.35));
+      color:#fff; text-align:left; font-weight:700; font-family:'Space Grotesk',sans-serif;
+    }
+    td{border-bottom:1px solid var(--border); color:var(--muted)}
+
+    .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
     .right{margin-left:auto}
-    .danger{color:#b00020}
-    .ok{color:#0c7a35}
-    .center{text-align:center}
-    .hidden{display:none}
-    @media(max-width:800px){.grid-2,.grid-3{grid-template-columns:1fr}}
+    .muted{color:var(--muted)}
+
+    /* Botões com micro-anim e glow */
+    .btn{
+      position:relative;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      color:#081226;
+      border:none; border-radius:12px;
+      padding:10px 16px; cursor:pointer; font-weight:700; letter-spacing:.2px;
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+      box-shadow: 0 6px 20px rgba(139,92,246,.35);
+      will-change: transform, box-shadow;
+    }
+    .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 26px rgba(34,211,238,.4) }
+    .btn:active{ transform:translateY(0) scale(.98) }
+    .btn-outline{
+      background:transparent; color:#dbeafe;
+      border:1px solid rgba(147,197,253,.5);
+      box-shadow:none;
+    }
+    .btn-outline:hover{
+      filter:drop-shadow(0 0 10px rgba(147,197,253,.3));
+      transform:translateY(-2px);
+    }
+    .btn-danger{ background:linear-gradient(90deg,#ef4444,#fb7185); color:#1b0b0b; }
+
+    .chip{
+      display:inline-block; padding:6px 10px; border-radius:999px;
+      background:linear-gradient(90deg, rgba(139,92,246,.25), rgba(34,211,238,.25));
+      color:#e9edff; font-size:.85rem; letter-spacing:.2px;
+    }
+
+    .activity{border-bottom:1px dashed var(--border); padding:10px 0}
+
+    /* Modal (popup) glassmorphism */
+    .modal-backdrop{
+      position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:50;
+      background:rgba(4,8,22,.55); backdrop-filter: blur(8px);
+      padding:16px;
+    }
+    .modal{
+      width:100%; max-width:780px; border-radius:20px;
+      background: linear-gradient(180deg, rgba(17,24,39,.85), rgba(17,24,39,.75));
+      border:1px solid var(--border); box-shadow:0 18px 60px rgba(0,0,0,.5); overflow:hidden;
+      animation:pop .16s ease;
+    }
+    @keyframes pop{from{transform:scale(.98); opacity:.8} to{transform:scale(1); opacity:1}}
+    .modal header{display:flex; align-items:center; gap:10px; padding:16px 18px; border-bottom:1px solid var(--border)}
+    .modal .content{padding:18px}
+    .modal .footer{padding:16px 18px; border-top:1px solid var(--border); display:flex; gap:10px; justify-content:flex-end; background:rgba(255,255,255,.02)}
+
+    .form-field label{display:block; font-weight:700; margin-bottom:6px; font-family:'Space Grotesk',sans-serif}
+    .form-field select, .form-field input{
+      width:100%; padding:12px 12px; border-radius:12px;
+      border:1px solid var(--border); background:rgba(255,255,255,.05); color:var(--txt);
+      outline:none; transition:border .15s ease, box-shadow .15s ease;
+    }
+    .form-field select:focus, .form-field input:focus{ border-color:var(--accent); box-shadow:0 0 0 3px rgba(34,211,238,.25) }
+
+    .exercise-row{
+      display:grid; grid-template-columns:1fr 140px 140px; gap:12px; align-items:center;
+      padding:10px 0; border-bottom:1px dashed var(--border);
+    }
+    .exercise-row:last-child{border-bottom:none}
+
+    /* Canvas charts fundo “escuro” */
+    canvas{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid var(--border); border-radius:14px; padding:10px}
+
+    @media (max-width:780px){
+      .exercise-row{grid-template-columns:1fr 1fr 1fr}
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>📊 Plano de Treino – 4 Etapas</h1>
+    <h1>🏋️ Plano de Treino – 4 Semanas</h1>
     <div class="row">
-      <span id="userInfo" class="muted">Nao Logado</span>
-      <button id="btnLogin" class="btn">Login Google</button>
-      <button id="btnLogout" class="btn btn-outline hidden">Sair</button>
+      <span id="userInfo" class="muted">Deslogado</span>
+      <button id="btnLogin" class="btn">Entrar com Google</button>
+      <button id="btnLogout" class="btn btn-outline" style="display:none">Sair</button>
     </div>
   </header>
 
@@ -75,17 +155,17 @@ body { background: var(--cor-fundo); color: var(--cor-texto); font-family: 'Inte
     <!-- PLANO (referência) -->
     <section class="card">
       <div class="row" style="justify-content:space-between">
-        <h2 style="margin:0">Plano de Treino</h2>
+        <h2 style="margin:0; font-family:'Space Grotesk',sans-serif">Plano (referência)</h2>
         <div class="row">
           <button class="btn" id="btnAdd">➕ Adicionar atividade</button>
-          <button class="btn btn-outline" id="btnExport">Backup</button>
-          <label class="btn btn-outline">
+          <button class="btn btn-outline" id="btnExport">Backup (JSON)</button>
+          <label class="btn btn-outline" style="cursor:pointer">
             Importar <input type="file" id="importFile" accept="application/json" style="display:none">
           </label>
         </div>
       </div>
-      
-      <div style="overflow:auto;margin-top:10px">
+      <div class="muted">Faça login para registrar/visualizar suas atividades. Seus dados ficam no Firestore da sua conta.</div>
+      <div style="overflow:auto;margin-top:14px">
         <table>
           <tr>
             <th>Semana</th>
@@ -95,161 +175,138 @@ body { background: var(--cor-fundo); color: var(--cor-texto); font-family: 'Inte
           </tr>
           <tr>
             <td>1 – Adaptação</td>
-            <td>Rotação externa c/ elástico 3x12–15<br>
-              Rotação interna c/ elástico (manguito) 3x12–15<br>
-              Elevação lateral c/ halteres 3x12–15<br>
-              Desenvolvimento militar halteres 2x12–15<br>
-              Supino reto com halteres 2x12–15<br>
-              Flexão de braço 3x até falha</td>
-            <td>Remada curvada com barra 3x12–15<br>
-              Puxada na frente polia alta 3x12–15<br>
-              Face pull com corda 3x12–15<br>
-              Rosca direta c/ barra/halteres 2x12–15<br>
-              Rosca martelo 2x12–15</td>
-            <td>Agachamento livre  3x12–15<br>
-              Afundo (avanço) 2x12–15<br>
-              Levant terra romeno c/ halteres 2x12–15<br>
-              Tríceps testa 2x12–15<br>
-              Tríceps Mergulho 2x falha<br>
-              Prancha Isometrica 3x30s<br>
-              Abdominal Infra 3x12–15</td>
+            <td>Rot. ext/int 3x12–15; Elevação lat 3x12–15; Desenvolv. 2x12–15; Supino 2x12–15; Flexão 2x falha</td>
+            <td>Remada 3x12–15; Puxada 3x12–15; Face pull 3x12–15; Rosca direta 2x12–15; Rosca martelo 2x12–15</td>
+            <td>Agacha 3x12–15; Afundo 2x12–15; Terra romeno 2x12–15; Tríceps testa 2x12–15; Mergulho 2x falha; Prancha 3x30s; Infra 3x12–15</td>
           </tr>
           <tr>
             <td>2 – Consolidação</td>
-            <td>Rot. ext/int 3x12<br>
-              Elevação lat 3x12<br>
-              Desenvolv. 3x10–12<br>
-              Supino 3x10–12<br>
-              Flexão 3x falha</td>
-            <td>Remada 3x10–12<br>
-              Puxada 3x10–12<br>
-              Face pull 3x12<br>
-              Rosca direta 3x10–12<br>
-              Rosca martelo 3x10–12</td>
-            <td>Agacha 3x10–12<br>
-              Afundo 3x10–12<br>
-              Terra romeno 3x10–12<br>
-              Tríceps testa 3x10–12<br>
-              Mergulho 3x falha<br>
-              Prancha 3x35s<br>
-              Infra 3x12</td>
+            <td>Rot. ext/int 3x12; Elevação lat 3x12; Desenvolv. 3x10–12; Supino 3x10–12; Flexão 3x falha</td>
+            <td>Remada 3x10–12; Puxada 3x10–12; Face pull 3x12; Rosca direta 3x10–12; Rosca martelo 3x10–12</td>
+            <td>Agacha 3x10–12; Afundo 3x10–12; Terra romeno 3x10–12; Tríceps testa 3x10–12; Mergulho 3x falha; Prancha 3x35s; Infra 3x12</td>
           </tr>
           <tr>
             <td>3 – Progressão</td>
-            <td>Rot. ext/int 3x12<br>Elevação lat 4x10<br>Desenvolv. 4x8–10<br>Supino 4x8–10<br>Flexão 3x falha</td>
-            <td>Remada 4x8–10<br>Puxada 4x8–10<br>Face pull 3x12<br>Rosca direta 3x10<br>Rosca martelo 3x10</td>
-            <td>Agacha 4x8–10<br>Afundo 3x10<br>Terra romeno 3x8–10<br>Tríceps testa 3x10<br>Mergulho 3x falha<br>Prancha 3x40s<br>Infra 3x12</td>
+            <td>Rot. ext/int 3x12; Elevação lat 4x10; Desenvolv. 4x8–10; Supino 4x8–10; Flexão 3x falha</td>
+            <td>Remada 4x8–10; Puxada 4x8–10; Face pull 3x12; Rosca direta 3x10; Rosca martelo 3x10</td>
+            <td>Agacha 4x8–10; Afundo 3x10; Terra romeno 3x8–10; Tríceps testa 3x10; Mergulho 3x falha; Prancha 3x40s; Infra 3x12</td>
           </tr>
           <tr>
             <td>4 – Choque</td>
-            <td>Rot. ext/int 3x15<br>Elevação lat 4x12 (drop)<br>Desenvolv. 4x10–12 (drop)<br>Supino 4x10–12 (drop)<br>Flexão 4x falha</td>
-            <td>Remada 4x10–12 (drop)<br>Puxada 4x10–12 (drop)<br>Face pull 4x12<br>Rosca direta 4x12 (drop)<br>Rosca martelo 4x12</td>
-            <td>Agacha 4x10–12 (drop)<br>Afundo 3x12<br>Terra romeno 4x10<br>Tríceps testa 4x12 (drop)<br>Mergulho 4x falha<br>Prancha 3x45s<br>Infra 3x15</td>
+            <td>Rot. ext/int 3x15; Elevação lat 4x12 (drop); Desenvolv. 4x10–12 (drop); Supino 4x10–12 (drop); Flexão 4x falha</td>
+            <td>Remada 4x10–12 (drop); Puxada 4x10–12 (drop); Face pull 4x12; Rosca direta 4x12 (drop); Rosca martelo 4x12</td>
+            <td>Agacha 4x10–12 (drop); Afundo 3x12; Terra romeno 4x10; Tríceps testa 4x12 (drop); Mergulho 4x falha; Prancha 3x45s; Infra 3x15</td>
           </tr>
         </table>
       </div>
     </section>
 
-    <!-- FORMULÁRIO -->
-    <section class="card hidden" id="formCard">
-      <h2 style="margin-top:0" id="formTitle">Nova atividade</h2>
-      <div class="grid grid-3">
-        <div>
-          <label for="fase">Fase (semana)</label>
-          <select id="fase">
-            <option>Semana 1</option><option>Semana 2</option>
-            <option>Semana 3</option><option>Semana 4</option>
-          </select>
-        </div>
-        <div>
-          <label for="grupo">Grupo muscular</label>
-          <select id="grupo">
-            <option>Ombro + Peito</option>
-            <option>Costas + Bíceps</option>
-            <option>Pernas + Tríceps + Core</option>
-          </select>
-        </div>
-        <div>
-          <label for="data">Data</label>
-          <input type="date" id="data"/>
-        </div>
-      </div>
-
-      <h3>Séries do dia</h3>
-      <div id="setsWrap"></div>
-      <button class="btn btn-outline" id="btnAddSet" type="button">+ Adicionar exercício</button>
-
-      <label for="obs">Observações</label>
-      <textarea id="obs" placeholder="Como se sentiu? Técnica? Sono/energia?"></textarea>
-
-      <div style="margin-top:12px" class="row">
-        <button class="btn" id="btnSave">Concluir e salvar</button>
-        <button class="btn btn-outline" id="btnCancel" type="button">Cancelar</button>
-      </div>
-    </section>
-
     <!-- HISTÓRICO -->
     <section class="card">
-      <h2 style="margin-top:0">Histórico</h2>
+      <h2 style="margin-top:0; font-family:'Space Grotesk',sans-serif">Histórico</h2>
       <div id="listaAtividades"></div>
     </section>
 
     <!-- DASHBOARD -->
     <section class="card">
-      <h2 style="margin-top:0">📈 Dashboard</h2>
-      <div class="grid grid-2">
-        <div>
-          <h3 class="center" style="margin:4px 0">Treinos por semana</h3>
-          <canvas id="chartSemanas" height="220"></canvas>
-        </div>
-        <div>
-          <h3 class="center" style="margin:4px 0">Volume por grupo (kg·reps)</h3>
-          <canvas id="chartGrupos" height="220"></canvas>
-        </div>
+      <h2 style="margin-top:0; font-family:'Space Grotesk',sans-serif">📈 Dashboard</h2>
+      <div class="row" style="margin-bottom:10px">
+        <span class="chip">Treinos por semana</span>
+        <span class="chip">Volume por grupo</span>
       </div>
-      <div class="grid grid-2" style="margin-top:16px">
-        <div>
-          <h3 class="center" style="margin:4px 0">Tendência de um exercício</h3>
-          <div class="row" style="gap:10px;margin-bottom:6px">
-            <input id="filterEx" placeholder="Ex.: Supino reto"/>
+      <div class="row" style="gap:16px; flex-wrap:wrap">
+        <canvas id="chartSemanas" height="220" style="flex:1 1 360px"></canvas>
+        <canvas id="chartGrupos"  height="220" style="flex:1 1 360px"></canvas>
+      </div>
+      <div class="row" style="margin-top:16px; gap:16px; flex-wrap:wrap">
+        <div style="flex:1 1 360px">
+          <h3 class="muted" style="margin:6px 0 8px">Tendência de um exercício</h3>
+          <div class="row" style="gap:10px;margin-bottom:8px">
+            <input id="filterEx" placeholder="Ex.: Supino reto" class="form-input" style="flex:1; padding:10px; border-radius:10px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--txt)">
             <button class="btn btn-outline" id="btnFiltrar">Plotar</button>
           </div>
           <canvas id="chartExercicio" height="220"></canvas>
-          <div class="muted">Use o nome exatamente como registrou.</div>
         </div>
-        <div>
-          <h3 class="center" style="margin:4px 0">Estatísticas</h3>
+        <div style="flex:1 1 260px">
+          <h3 class="muted" style="margin:6px 0 8px">Estatísticas</h3>
           <div id="stats"></div>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- MODAL: adicionar atividade -->
+  <div class="modal-backdrop" id="modalAdd">
+    <div class="modal">
+      <header>
+        <h3 style="margin:0; font-family:'Space Grotesk',sans-serif">Adicionar atividade</h3>
+        <span class="chip">Marque concluídos e adicione peso (kg)</span>
+        <button class="btn btn-outline right" id="btnCloseModal">Fechar</button>
+      </header>
+      <div class="content">
+        <div class="row" style="gap:14px; flex-wrap:wrap">
+          <div class="form-field" style="flex:1 1 220px">
+            <label>Semana</label>
+            <select id="selSemana">
+              <option>Semana 1</option>
+              <option>Semana 2</option>
+              <option>Semana 3</option>
+              <option>Semana 4</option>
+            </select>
+          </div>
+          <div class="form-field" style="flex:1 1 220px">
+            <label>Dia</label>
+            <select id="selDia">
+              <option value="A">Dia A (Ombro + Peito)</option>
+              <option value="B">Dia B (Costas + Bíceps)</option>
+              <option value="C">Dia C (Pernas + Tríceps + Core)</option>
+            </select>
+          </div>
+          <div class="form-field" style="flex:1 1 220px">
+            <label>Data</label>
+            <input type="date" id="selData">
+          </div>
+        </div>
+
+        <div id="exerciseList" style="margin-top:12px"></div>
+
+        <div class="form-field" style="margin-top:12px">
+          <label>Observações</label>
+          <input id="inpObs" placeholder="Como se sentiu? Observações do dia.">
+        </div>
+      </div>
+      <div class="footer">
+        <button class="btn btn-outline" id="btnClearModal">Limpar</button>
+        <button class="btn" id="btnSaveModal">Concluir e salvar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- libs -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <!-- Firebase SDKs (modular) -->
+  <!-- Firebase SDKs (modular) + App -->
   <script type="module">
-    /* ===========================
-       1) CONFIGURE SEU FIREBASE
-       =========================== */
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDmxVS3YbIEZ6E6E6pYnlqEYSnlh2-1-c0",
-  authDomain: "mrovere-treino.firebaseapp.com",
-  projectId: "mrovere-treino",
-  storageBucket: "mrovere-treino.firebasestorage.app",
-  messagingSenderId: "699941554235",
-  appId: "1:699941554235:web:e96bc21c9fd6dd2df0341e",
-  measurementId: "G-CXP4VQKETF"
-};
+    /* =======================
+       Firebase Config (seu)
+       ======================= */
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyDmxVS3YbIEZ6E6E6pYnlqEYSnlh2-1-c0",
+      authDomain: "mrovere-treino.firebaseapp.com",
+      projectId: "mrovere-treino",
+      storageBucket: "mrovere-treino.firebasestorage.app",
+      messagingSenderId: "699941554235",
+      appId: "1:699941554235:web:e96bc21c9fd6dd2df0341e",
+      measurementId: "G-CXP4VQKETF"
+    };
 
-    /* ===========================
-       2) IMPORTS E INIT
-       =========================== */
+    /* ============ Imports/Init ============ */
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
     import {
-      getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged
+      getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect,
+      setPersistence, browserLocalPersistence,
+      onAuthStateChanged, signOut
     } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
     import {
       getFirestore, enableIndexedDbPersistence,
@@ -257,47 +314,54 @@ const firebaseConfig = {
       updateDoc, doc, deleteDoc, serverTimestamp
     } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
-    const app  = initializeApp(firebaseConfig);
+    const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db   = getFirestore(app);
-    enableIndexedDbPersistence(db).catch(()=>{ /* alguns modos privados não suportam */ });
+    enableIndexedDbPersistence(db).catch(()=>{});
+    await setPersistence(auth, browserLocalPersistence);
 
-    /* ===========================
-       3) ESTADO E HELPERS
-       =========================== */
-    let UID = null;
-    let editingId = null;
-    let chSemanas, chGrupos, chEx;
+    /* ============ Estado/Helpers ============ */
+    let UID = null, chSemanas, chGrupos, chEx;
+    const $ = s=>document.querySelector(s), byId=id=>document.getElementById(id);
+    const fmtDate = iso => !iso ? "" : new Date(iso+"T00:00:00").toLocaleDateString("pt-BR");
+    const todayISO = () => new Date().toISOString().slice(0,10);
+    const weekKey = iso => { const d=new Date(iso+"T00:00:00"), one=new Date(d.getFullYear(),0,1); return d.getFullYear()+"-S"+String(Math.ceil((((d-one)/86400000)+one.getDay()+1)/7)).padStart(2,"0"); };
+    const sum = a=>a.reduce((x,y)=>x+y,0);
 
-    const $ = (sel) => document.querySelector(sel);
-    const byId = (id) => document.getElementById(id);
-    const fmtDate = (iso) => !iso ? "" : new Date(iso+"T00:00:00").toLocaleDateString("pt-BR");
-    const weekKey = (iso) => {
-      const d=new Date(iso+"T00:00:00"), onejan=new Date(d.getFullYear(),0,1);
-      return d.getFullYear()+"-S"+String(Math.ceil((((d-onejan)/86400000)+onejan.getDay()+1)/7)).padStart(2,"0");
+    // Plano base (exercícios por semana/dia)
+    const PLAN = {
+      "Semana 1": {
+        A: ["Rotação externa/interna","Elevação lateral","Desenvolvimento","Supino reto","Flexão de braço"],
+        B: ["Remada curvada","Puxada na frente","Face pull","Rosca direta","Rosca martelo"],
+        C: ["Agachamento","Afundo","Terra romeno","Tríceps testa","Mergulho banco","Prancha","Abdominal infra"]
+      },
+      "Semana 2": {
+        A: ["Rotação externa/interna","Elevação lateral","Desenvolvimento","Supino reto","Flexão de braço"],
+        B: ["Remada curvada","Puxada na frente","Face pull","Rosca direta","Rosca martelo"],
+        C: ["Agachamento","Afundo","Terra romeno","Tríceps testa","Mergulho banco","Prancha","Abdominal infra"]
+      },
+      "Semana 3": {
+        A: ["Rotação externa/interna","Elevação lateral","Desenvolvimento","Supino reto","Flexão de braço"],
+        B: ["Remada curvada","Puxada na frente","Face pull","Rosca direta","Rosca martelo"],
+        C: ["Agachamento","Afundo","Terra romeno","Tríceps testa","Mergulho banco","Prancha","Abdominal infra"]
+      },
+      "Semana 4": {
+        A: ["Rotação externa/interna","Elevação lateral","Desenvolvimento","Supino reto","Flexão de braço"],
+        B: ["Remada curvada","Puxada na frente","Face pull","Rosca direta","Rosca martelo"],
+        C: ["Agachamento","Afundo","Terra romeno","Tríceps testa","Mergulho banco","Prancha","Abdominal infra"]
+      }
     };
-    const sum = (a)=>a.reduce((x,y)=>x+y,0);
+    const DIA_TO_GRUPO = { A:"Ombro + Peito", B:"Costas + Bíceps", C:"Pernas + Tríceps + Core" };
 
-    function calcVolume(activity){
-      let total=0;
-      (activity.sets||[]).forEach(s=>{
-        (s.series||[]).forEach(x=>{
-          total += (Number(x.reps)||0) * (Number(x.carga)||0);
-        });
-      });
-      return total;
-    }
-
-    /* ===========================
-       4) AUTH (login/logout)
-       =========================== */
-    const userInfo = byId("userInfo");
-    const btnLogin = byId("btnLogin");
-    const btnLogout= byId("btnLogout");
-
+    /* ============ Auth (popup/redirect) ============ */
+    const userInfo=byId("userInfo"), btnLogin=byId("btnLogin"), btnLogout=byId("btnLogout");
+    function isSafariOrIOS(){ const ua=navigator.userAgent; return /iPhone|iPad|iPod/i.test(ua) || /^((?!chrome|android).)*safari/i.test(ua); }
     btnLogin.onclick = async ()=>{
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      try{
+        const provider = new GoogleAuthProvider();
+        if(isSafariOrIOS()) await signInWithRedirect(auth, provider);
+        else await signInWithPopup(auth, provider);
+      }catch(e){ alert(`Erro de login: ${e.code||e.message}`); }
     };
     btnLogout.onclick = ()=> signOut(auth);
 
@@ -305,243 +369,170 @@ const firebaseConfig = {
       if(user){
         UID = user.uid;
         userInfo.textContent = `Olá, ${user.displayName || user.email}`;
-        btnLogin.classList.add("hidden");
-        btnLogout.classList.remove("hidden");
-        await renderHistorico();
-        renderDash();
+        btnLogin.style.display="none"; btnLogout.style.display="inline-block";
+        await renderHistorico(); renderDash();
       }else{
         UID = null;
         userInfo.textContent = "Deslogado";
-        btnLogin.classList.remove("hidden");
-        btnLogout.classList.add("hidden");
-        $("#listaAtividades").innerHTML = '<div class="muted">Entre com Google para ver/registrar seus treinos.</div>';
-        resetCharts();
+        btnLogin.style.display="inline-block"; btnLogout.style.display="none";
+        byId("listaAtividades").innerHTML = '<div class="muted">Entre com Google para ver/registrar seus treinos.</div>';
+        if(chSemanas) chSemanas.destroy(); if(chGrupos) chGrupos.destroy(); if(chEx) chEx.destroy();
       }
     });
 
-    function resetCharts(){
-      if(chSemanas) chSemanas.destroy();
-      if(chGrupos)  chGrupos.destroy();
-      if(chEx)      chEx.destroy();
-    }
-
-    /* ===========================
-       5) FORM DINÂMICO
-       =========================== */
-    const formCard = byId("formCard");
-    const setsWrap = byId("setsWrap");
-
-    byId("btnAdd").onclick = ()=>{
-      if(!UID){ alert("Entre com Google para adicionar atividades."); return; }
-      openForm(); // novo
-    };
-    byId("btnCancel").onclick = closeForm;
-    byId("btnAddSet").onclick = ()=> addSetRow();
-
-    function openForm(activity=null){
-      formCard.classList.remove("hidden");
-      byId("formTitle").textContent = activity ? "Editar atividade" : "Nova atividade";
-      byId("fase").value = activity?.fase || "Semana 1";
-      byId("grupo").value = activity?.grupo || "Ombro + Peito";
-      byId("data").value = activity?.data || new Date().toISOString().slice(0,10);
-      byId("obs").value  = activity?.obs || "";
-      setsWrap.innerHTML = "";
-      (activity?.sets?.length ? activity.sets : [{exercicio:"",series:[{reps:"",carga:""}]}]).forEach(s=>{
-        addSetRow(s);
-      });
-      editingId = activity?.id || null;
-    }
-    function closeForm(){
-      formCard.classList.add("hidden");
-      setsWrap.innerHTML = "";
-      byId("obs").value="";
-      editingId = null;
-    }
-    function addSetRow(prefill={exercicio:"",series:[{reps:"",carga:""}]}){
-      const block = document.createElement("div");
-      block.className="card";
-      block.style.padding="12px";
-      block.innerHTML = `
-        <div class="row" style="justify-content:space-between">
-          <div style="flex:1">
-            <label>Exercício</label>
-            <input class="exNome" placeholder="Ex.: Supino reto" value="${prefill.exercicio||""}">
-          </div>
-          <button class="btn btn-outline" type="button">Remover</button>
-        </div>
-        <div class="seriesWrap"></div>
-        <button class="btn btn-outline" type="button">+ Série</button>
-      `;
-      const seriesWrap = block.querySelector(".seriesWrap");
-      const btnDel = block.querySelector(".btn.btn-outline");
-      const btnAddSerie = block.querySelectorAll(".btn.btn-outline")[1];
-      btnDel.onclick = ()=> block.remove();
-      btnAddSerie.onclick = ()=> addSerieRow(seriesWrap);
-      (prefill.series||[{reps:"",carga:""}]).forEach(s=> addSerieRow(seriesWrap, s));
-      setsWrap.appendChild(block);
-    }
-    function addSerieRow(container, s={reps:"",carga:""}){
-      const row = document.createElement("div");
-      row.className="row";
-      row.style.marginTop="8px";
-      row.innerHTML = `
-        <label style="min-width:64px">Reps</label>
-        <input class="reps" type="number" min="0" style="max-width:110px" value="${s.reps||""}">
-        <label style="min-width:90px">Carga (kg)</label>
-        <input class="carga" type="number" min="0" step="0.5" style="max-width:120px" value="${s.carga||""}">
-        <button class="btn btn-outline" type="button">–</button>
-      `;
-      row.querySelector("button").onclick = ()=> row.remove();
-      container.appendChild(row);
-    }
-
-    /* ===========================
-       6) FIRESTORE CRUD
-       =========================== */
+    /* ============ Firestore CRUD ============ */
     async function fetchActivities(){
       if(!UID) return [];
       const qRef = query(collection(db,"users",UID,"activities"), orderBy("data","desc"));
       const snap = await getDocs(qRef);
-      return snap.docs.map(d=>({ id:d.id, ...d.data() }));
+      return snap.docs.map(d=>({id:d.id, ...d.data()}));
     }
     async function addActivity(payload){
-      if(!UID) throw new Error("Login necessário");
-      payload.createdAt = serverTimestamp();
-      payload.updatedAt = serverTimestamp();
+      payload.createdAt = serverTimestamp(); payload.updatedAt = serverTimestamp();
       await addDoc(collection(db,"users",UID,"activities"), payload);
     }
-    async function updateActivity(id, payload){
-      payload.updatedAt = serverTimestamp();
-      await updateDoc(doc(db,"users",UID,"activities",id), payload);
-    }
-    async function deleteActivity(id){
-      await deleteDoc(doc(db,"users",UID,"activities",id));
+    async function deleteActivity(id){ await deleteDoc(doc(db,"users",UID,"activities",id)); }
+
+    function calcVolumeBySets(sets){
+      // volume simples: soma das cargas (sem reps) dos exercícios marcados
+      return (sets||[]).reduce((t,s)=> t + Number(s.series?.[0]?.carga||0), 0);
     }
 
-    // Salvar (criar/editar)
-    byId("btnSave").onclick = async ()=>{
+    /* ============ Modal (Adicionar atividade) ============ */
+    const modal = byId("modalAdd"), btnAdd=byId("btnAdd"), btnCloseModal=byId("btnCloseModal");
+    const selSemana=byId("selSemana"), selDia=byId("selDia"), selData=byId("selData");
+    const exerciseList=byId("exerciseList"), btnSaveModal=byId("btnSaveModal"), btnClearModal=byId("btnClearModal"), inpObs=byId("inpObs");
+
+    function openModal(){
+      if(!UID){ alert("Entre com Google para adicionar atividades."); return; }
+      modal.style.display = "flex";
+      selData.value = todayISO();
+      renderExercises();
+    }
+    function closeModal(){ modal.style.display="none"; exerciseList.innerHTML=""; inpObs.value=""; }
+    function renderExercises(){
+      const semana = selSemana.value, dia = selDia.value;
+      const list = PLAN[semana]?.[dia] || [];
+      exerciseList.innerHTML = "";
+      if(!list.length){ exerciseList.innerHTML = '<div class="muted">Sem exercícios para esta combinação.</div>'; return; }
+      list.forEach(name=>{
+        const row = document.createElement("div");
+        row.className = "exercise-row";
+        row.innerHTML = `
+          <div style="font-family:'Space Grotesk',sans-serif"><strong>${name}</strong></div>
+          <div><input type="number" min="0" step="0.5" placeholder="Peso (kg)" data-weight class="form-input"></div>
+          <div class="row"><input type="checkbox" data-done id="chk-${name}"><label for="chk-${name}" class="muted">Concluído</label></div>
+        `;
+        exerciseList.appendChild(row);
+      });
+    }
+    btnAdd.onclick = openModal;
+    btnCloseModal.onclick = closeModal;
+    btnClearModal.onclick = ()=>{ exerciseList.querySelectorAll('input[type="number"]').forEach(i=>i.value=""); exerciseList.querySelectorAll('input[type="checkbox"]').forEach(c=>c.checked=false); };
+    selSemana.onchange = renderExercises; selDia.onchange = renderExercises;
+
+    btnSaveModal.onclick = async ()=>{
       if(!UID){ alert("Faça login."); return; }
-      const fase = byId("fase").value;
-      const grupo= byId("grupo").value;
-      const data = byId("data").value;
-      const obs  = byId("obs").value;
-      if(!data){ alert("Informe a data."); return; }
+      const fase = selSemana.value;
+      const dia  = selDia.value;
+      const grupo= DIA_TO_GRUPO[dia] || "";
+      const data = selData.value || todayISO();
+      const obs  = inpObs.value || "";
 
-      const sets = Array.from(setsWrap.querySelectorAll(".card")).map(b=>{
-        const exercicio = b.querySelector(".exNome").value.trim();
-        const series = Array.from(b.querySelectorAll(".seriesWrap .row")).map(r=>{
-          const reps  = Number(r.querySelector(".reps").value)||0;
-          const carga = Number(r.querySelector(".carga").value)||0;
-          return {reps, carga};
-        }).filter(s=> s.reps>0 || s.carga>0);
-        return {exercicio, series};
-      }).filter(s=> s.exercicio && s.series.length);
+      const rows = Array.from(exerciseList.querySelectorAll(".exercise-row"));
+      const sets = rows.map(r=>{
+        const name = r.querySelector("strong").textContent;
+        const carga = Number(r.querySelector('[data-weight]').value) || 0;
+        const done  = r.querySelector('[data-done]').checked;
+        return { exercicio:name, done, series:[{ reps:0, carga }] };
+      }).filter(s=> s.done || (s.series?.[0]?.carga||0) > 0);
 
-      if(!sets.length){ alert("Adicione ao menos um exercício com séries."); return; }
+      if(!sets.length){ alert("Preencha ao menos um peso ou marque algum exercício como concluído."); return; }
 
-      const payload = { data, fase, grupo, sets, obs, volume: calcVolume({sets}) };
-
-      if(editingId){ await updateActivity(editingId, payload); }
-      else         { await addActivity(payload); }
-
-      closeForm();
-      await renderHistorico();
-      renderDash();
+      const volume = calcVolumeBySets(sets);
+      const payload = { data, fase, grupo, sets, obs, volume };
+      await addActivity(payload);
+      closeModal();
+      await renderHistorico(); renderDash();
     };
 
-    /* ===========================
-       7) HISTÓRICO
-       =========================== */
+    /* ============ Histórico ============ */
     async function renderHistorico(){
       const cont = byId("listaAtividades");
       cont.innerHTML = '<div class="muted">Carregando…</div>';
-
       const atividades = await fetchActivities();
       if(!atividades.length){ cont.innerHTML = '<div class="muted">Sem atividades ainda.</div>'; return; }
-
       cont.innerHTML = "";
       atividades.forEach(a=>{
-        const volume = Number(a.volume ?? calcVolume(a));
+        const vol = Number(a.volume||0);
         const el = document.createElement("div");
-        el.className = "activity";
+        el.className="activity";
         el.innerHTML = `
           <div>
             <b>${fmtDate(a.data)}</b> · <span class="chip">${a.fase}</span> <span class="chip">${a.grupo}</span>
             <span class="right">
-              <button class="btn btn-outline" data-edit="${a.id}">Editar</button>
-              <button class="btn btn-outline danger" data-del="${a.id}">Excluir</button>
+              <button class="btn btn-outline btn-danger" data-del="${a.id}">Excluir</button>
             </span>
           </div>
-          <div class="muted">Volume: <b>${volume.toFixed(1)}</b> kg·reps</div>
+          <div class="muted">Volume (kg): <b>${vol.toFixed(1)}</b></div>
           <div style="margin-top:6px">
             ${(a.sets||[]).map(s=>{
-              const seriesTxt = (s.series||[]).map((x,i)=>`S${i+1}:${x.reps}x${x.carga}kg`).join(" · ");
-              return `<div>• <b>${s.exercicio}</b> — ${seriesTxt}</div>`;
+              const carga = s.series?.[0]?.carga ?? 0;
+              const done  = s.done ? "✅" : "⬜️";
+              return `<div>• ${done} <b>${s.exercicio}</b> — ${carga} kg</div>`;
             }).join("")}
           </div>
           ${a.obs ? `<div class="muted" style="margin-top:6px">Obs: ${a.obs}</div>` : ""}
         `;
-        el.querySelector(`[data-edit="${a.id}"]`).onclick = ()=> openForm(a);
         el.querySelector(`[data-del="${a.id}"]`).onclick = async ()=>{
-          if(confirm("Excluir esta atividade?")){
-            await deleteActivity(a.id);
-            await renderHistorico(); renderDash();
-          }
+          if(confirm("Excluir esta atividade?")){ await deleteActivity(a.id); await renderHistorico(); renderDash(); }
         };
         cont.appendChild(el);
       });
     }
 
-    /* ===========================
-       8) DASHBOARD (Chart.js)
-       =========================== */
+    /* ============ Dashboard (Chart.js) ============ */
+    function palette(n){
+      const base = ['#8b5cf6','#06b6d4','#10b981','#f59e0b','#ef4444','#22d3ee','#a78bfa','#34d399'];
+      const arr=[]; for(let i=0;i<n;i++) arr.push(base[i%base.length]); return arr;
+    }
+
     async function renderDash(){
       if(!UID) return;
       const atividades = await fetchActivities();
 
-      // Treinos por semana
       const porSemana = {};
-      atividades.forEach(a=>{
-        const wk = weekKey(a.data);
-        porSemana[wk] = (porSemana[wk]||0)+1;
-      });
+      atividades.forEach(a=>{ const wk=weekKey(a.data); porSemana[wk]=(porSemana[wk]||0)+1; });
       const sLabels = Object.keys(porSemana).sort();
       const sVals   = sLabels.map(k=>porSemana[k]);
 
-      // Volume por grupo
       const porGrupo = {};
-      atividades.forEach(a=>{
-        const vol = Number(a.volume ?? calcVolume(a));
-        porGrupo[a.grupo] = (porGrupo[a.grupo]||0) + vol;
-      });
+      atividades.forEach(a=>{ porGrupo[a.grupo]=(porGrupo[a.grupo]||0)+Number(a.volume||0); });
       const gLabels = Object.keys(porGrupo);
       const gVals   = gLabels.map(k=>porGrupo[k]);
 
-      // Stats
-      const total  = atividades.length;
-      const totalV = atividades.reduce((t,a)=> t + Number(a.volume ?? calcVolume(a)), 0);
-      const ultimo = atividades.slice().sort((a,b)=> a.data<b.data?1:-1)[0];
+      const total = atividades.length;
+      const totalV= atividades.reduce((t,a)=>t+Number(a.volume||0),0);
+      const ultimo= atividades.slice().sort((a,b)=> a.data<b.data?1:-1)[0];
       byId("stats").innerHTML = `
         <div><b>Total de treinos:</b> ${total}</div>
-        <div><b>Volume acumulado:</b> ${totalV.toFixed(1)} kg·reps</div>
+        <div><b>Volume acumulado (kg):</b> ${totalV.toFixed(1)}</div>
         ${ultimo ? `<div><b>Último treino:</b> ${fmtDate(ultimo.data)} · <span class="chip">${ultimo.grupo}</span></div>` : ""}
       `;
 
-      // Charts
       const ctxS = byId("chartSemanas").getContext("2d");
       const ctxG = byId("chartGrupos").getContext("2d");
-      if(chSemanas) chSemanas.destroy();
-      if(chGrupos)  chGrupos.destroy();
+      if(chSemanas) chSemanas.destroy(); if(chGrupos) chGrupos.destroy();
 
       chSemanas = new Chart(ctxS,{
         type:"bar",
-        data:{ labels:sLabels, datasets:[{ label:"Treinos/semana", data:sVals }] },
-        options:{ responsive:true, scales:{ y:{ beginAtZero:true } } }
+        data:{ labels:sLabels, datasets:[{ label:"Treinos/semana", data:sVals, backgroundColor:palette(sVals.length)}] },
+        options:{ responsive:true, scales:{ y:{ beginAtZero:true, ticks:{color:'#c7d2fe'}}, x:{ticks:{color:'#c7d2fe'}}}, plugins:{legend:{labels:{color:'#e2e8f0'}}}}
       });
-      chGrupos = new Chart(ctxG,{
+      chGrupos  = new Chart(ctxG,{
         type:"pie",
-        data:{ labels:gLabels, datasets:[{ label:"Volume (kg·reps)", data:gVals }] },
-        options:{ responsive:true }
+        data:{ labels:gLabels, datasets:[{ label:"Volume (kg)", data:gVals, backgroundColor:palette(gVals.length)}] },
+        options:{ responsive:true, plugins:{legend:{labels:{color:'#e2e8f0'}}}}
       });
 
       // Tendência por exercício
@@ -553,10 +544,8 @@ const firebaseConfig = {
           let v=0, max=0;
           (a.sets||[]).forEach(s=>{
             if((s.exercicio||"").toLowerCase()===nome){
-              (s.series||[]).forEach(x=>{
-                v += (Number(x.reps)||0)*(Number(x.carga)||0);
-                if((Number(x.carga)||0)>max) max = Number(x.carga)||0;
-              });
+              const carga = Number(s.series?.[0]?.carga||0);
+              v += carga; if(carga>max) max=carga;
             }
           });
           if(v>0){ labels.push(fmtDate(a.data)); vol.push(v); maxLoad.push(max); }
@@ -566,44 +555,34 @@ const firebaseConfig = {
         chEx = new Chart(ctx,{
           type:"line",
           data:{ labels, datasets:[
-            {label:"Volume (kg·reps)",data:vol},
-            {label:"Carga máxima (kg)",data:maxLoad}
+            {label:"Soma das cargas (kg)",data:vol, borderColor:"#22d3ee"},
+            {label:"Carga máxima (kg)",data:maxLoad, borderColor:"#a78bfa"}
           ]},
-          options:{ responsive:true, scales:{ y:{ beginAtZero:true } } }
+          options:{ responsive:true, scales:{ y:{ beginAtZero:true, ticks:{color:'#c7d2fe'}}, x:{ticks:{color:'#c7d2fe'}}}, plugins:{legend:{labels:{color:'#e2e8f0'}}}}
         });
       };
     }
 
-    /* ===========================
-       9) BACKUP / RESTORE
-       =========================== */
+    /* ============ Backup / Restore ============ */
     byId("btnExport").onclick = async ()=>{
       if(!UID){ alert("Faça login."); return; }
       const data = await fetchActivities();
       const blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "treinos_backup.json";
-      a.click();
+      const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "treinos_backup.json"; a.click();
       URL.revokeObjectURL(a.href);
     };
     byId("importFile").addEventListener("change", async (e)=>{
       if(!UID){ alert("Faça login."); e.target.value=""; return; }
       const f=e.target.files[0]; if(!f) return;
       try{
-        const text = await f.text();
-        const arr  = JSON.parse(text);
+        const text = await f.text(); const arr = JSON.parse(text);
         if(!Array.isArray(arr)) throw new Error("JSON inválido");
         for(const a of arr){
-          const payload = {
-            data:a.data, fase:a.fase, grupo:a.grupo, sets:a.sets||[],
-            obs:a.obs||"", volume:Number(a.volume||0),
-            createdAt: serverTimestamp(), updatedAt: serverTimestamp()
-          };
+          const payload = { data:a.data, fase:a.fase, grupo:a.grupo, sets:a.sets||[], obs:a.obs||"", volume:Number(a.volume||0),
+            createdAt: serverTimestamp(), updatedAt: serverTimestamp() };
           await addActivity(payload);
         }
-        await renderHistorico(); renderDash();
-        alert("Importação concluída!");
+        await renderHistorico(); renderDash(); alert("Importação concluída!");
       }catch(err){ alert("Erro ao importar JSON."); }
       e.target.value="";
     });
