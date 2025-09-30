@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Plano de Treino – 4 Semanas (Firebase)</title>
+  <title>Plano de Treino – 4 Etapas</title>
   <style>
     :root{--azul:#4a90e2;--cinza:#f7f7f7;--borda:#d0d0d0;}
     *{box-sizing:border-box}
@@ -38,10 +38,10 @@
 </head>
 <body>
   <header>
-    <h1>📊 Plano de Treino – 4 Semanas (Firebase)</h1>
+    <h1>📊 Plano de Treino – 4 Etapas</h1>
     <div class="row">
-      <span id="userInfo" class="muted">Deslogado</span>
-      <button id="btnLogin" class="btn">Entrar com Google</button>
+      <span id="userInfo" class="muted">Nao Logado</span>
+      <button id="btnLogin" class="btn">Login Google</button>
       <button id="btnLogout" class="btn btn-outline hidden">Sair</button>
     </div>
   </header>
@@ -50,16 +50,16 @@
     <!-- PLANO (referência) -->
     <section class="card">
       <div class="row" style="justify-content:space-between">
-        <h2 style="margin:0">Plano (referência)</h2>
+        <h2 style="margin:0">Plano de Treino</h2>
         <div class="row">
           <button class="btn" id="btnAdd">➕ Adicionar atividade</button>
-          <button class="btn btn-outline" id="btnExport">Backup (JSON)</button>
+          <button class="btn btn-outline" id="btnExport">Backup</button>
           <label class="btn btn-outline">
             Importar <input type="file" id="importFile" accept="application/json" style="display:none">
           </label>
         </div>
       </div>
-      <div class="muted">Os dados ficam na sua conta (Firestore). Faça login para registrar/visualizar.</div>
+      
       <div style="overflow:auto;margin-top:10px">
         <table>
           <tr>
@@ -70,27 +70,40 @@
           </tr>
           <tr>
             <td>1 – Adaptação</td>
-            <td>Rot. ext/int 3x12–15; Elevação lat 3x12–15; Desenvolv. 2x12–15; Supino 2x12–15; Flexão 2x falha</td>
-            <td>Remada 3x12–15; Puxada 3x12–15; Face pull 3x12–15; Rosca direta 2x12–15; Rosca martelo 2x12–15</td>
-            <td>Agacha 3x12–15; Afundo 2x12–15; Terra romeno 2x12–15; Tríceps testa 2x12–15; Mergulho 2x falha; Prancha 3x30s; Infra 3x12–15</td>
+            <td>Rot. ext/int 3x12–15<br>
+              Elevação lat 3x12–15<br>
+              Desenvolv. 2x12–15; Supino 2x12–15<br>
+              Flexão 2x falha</td>
+            <td>Remada 3x12–15<br>
+              Puxada 3x12–15<br>
+              Face pull 3x12–15<br>
+              Rosca direta 2x12–15<br>
+              Rosca martelo 2x12–15</td>
+            <td>Agacha 3x12–15<br>
+              Afundo 2x12–15<br>
+              Terra romeno 2x12–15<br>
+              Tríceps testa 2x12–15<br>
+              Mergulho 2x falha<br>
+              Prancha 3x30s<br>
+              Infra 3x12–15</td>
           </tr>
           <tr>
             <td>2 – Consolidação</td>
-            <td>Rot. ext/int 3x12; Elevação lat 3x12; Desenvolv. 3x10–12; Supino 3x10–12; Flexão 3x falha</td>
-            <td>Remada 3x10–12; Puxada 3x10–12; Face pull 3x12; Rosca direta 3x10–12; Rosca martelo 3x10–12</td>
-            <td>Agacha 3x10–12; Afundo 3x10–12; Terra romeno 3x10–12; Tríceps testa 3x10–12; Mergulho 3x falha; Prancha 3x35s; Infra 3x12</td>
+            <td>Rot. ext/int 3x12<br>Elevação lat 3x12<br>Desenvolv. 3x10–12<br>Supino 3x10–12<br>Flexão 3x falha</td>
+            <td>Remada 3x10–12<br>Puxada 3x10–12<br>Face pull 3x12<br>Rosca direta 3x10–12<br>Rosca martelo 3x10–12</td>
+            <td>Agacha 3x10–12<br>Afundo 3x10–12<br>Terra romeno 3x10–12<br>Tríceps testa 3x10–12<br>Mergulho 3x falha<br>Prancha 3x35s<br>Infra 3x12</td>
           </tr>
           <tr>
             <td>3 – Progressão</td>
-            <td>Rot. ext/int 3x12; Elevação lat 4x10; Desenvolv. 4x8–10; Supino 4x8–10; Flexão 3x falha</td>
-            <td>Remada 4x8–10; Puxada 4x8–10; Face pull 3x12; Rosca direta 3x10; Rosca martelo 3x10</td>
-            <td>Agacha 4x8–10; Afundo 3x10; Terra romeno 3x8–10; Tríceps testa 3x10; Mergulho 3x falha; Prancha 3x40s; Infra 3x12</td>
+            <td>Rot. ext/int 3x12<br>Elevação lat 4x10<br>Desenvolv. 4x8–10<br>Supino 4x8–10<br>Flexão 3x falha</td>
+            <td>Remada 4x8–10<br>Puxada 4x8–10<br>Face pull 3x12<br>Rosca direta 3x10<br>Rosca martelo 3x10</td>
+            <td>Agacha 4x8–10<br>Afundo 3x10<br>Terra romeno 3x8–10<br>Tríceps testa 3x10<br>Mergulho 3x falha<br>Prancha 3x40s<br>Infra 3x12</td>
           </tr>
           <tr>
             <td>4 – Choque</td>
-            <td>Rot. ext/int 3x15; Elevação lat 4x12 (drop); Desenvolv. 4x10–12 (drop); Supino 4x10–12 (drop); Flexão 4x falha</td>
-            <td>Remada 4x10–12 (drop); Puxada 4x10–12 (drop); Face pull 4x12; Rosca direta 4x12 (drop); Rosca martelo 4x12</td>
-            <td>Agacha 4x10–12 (drop); Afundo 3x12; Terra romeno 4x10; Tríceps testa 4x12 (drop); Mergulho 4x falha; Prancha 3x45s; Infra 3x15</td>
+            <td>Rot. ext/int 3x15<br>Elevação lat 4x12 (drop)<br>Desenvolv. 4x10–12 (drop)<br>Supino 4x10–12 (drop)<br>Flexão 4x falha</td>
+            <td>Remada 4x10–12 (drop)<br>Puxada 4x10–12 (drop)<br>Face pull 4x12<br>Rosca direta 4x12 (drop)<br>Rosca martelo 4x12</td>
+            <td>Agacha 4x10–12 (drop)<br>Afundo 3x12<br>Terra romeno 4x10<br>Tríceps testa 4x12 (drop)<br>Mergulho 4x falha<br>Prancha 3x45s<br>Infra 3x15</td>
           </tr>
         </table>
       </div>
