@@ -4,6 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Plano de Treino – 4 Etapas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{--azul:#4a90e2;--cinza:#f7f7f7;--borda:#d0d0d0;--cor-primaria: #6366f1;   /* Indigo (botões, destaques) */
   --cor-secundaria: #06b6d4; /* Ciano */
@@ -21,10 +22,27 @@ body { background: var(--cor-fundo); color: var(--cor-texto); font-family: 'Inte
     table{width:100%;border-collapse:collapse}
     th,td{border:1px solid #bbb;padding:8px;vertical-align:top}
     th{background:var(--azul);color:#fff}
-    .btn{background:var(--azul);color:#fff;border:none;border-radius:6px;padding:10px 14px;cursor:pointer;transition:all 0.2s ease;font-weight: 600;letter-spacing: 0.3px;}
+    .btn {
+  background: var(--cor-primaria);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.2s ease;
+}
     .btn:disabled{opacity:.6;cursor:not-allowed}
-    .btn:hover {transform: translateY(-2px);box-shadow: 0 4px 10px rgba(99,102,241,0.3);}
-    .btn-outline{background:#fff;color:var(--azul);border:1px solid var(--azul)}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(99,102,241,0.3);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--cor-primaria);
+  border: 1px solid var(--cor-primaria);
+}
     .grid{display:grid;gap:12px}
     .grid-2{grid-template-columns:1fr 1fr}
     .grid-3{grid-template-columns:repeat(3,1fr)}
