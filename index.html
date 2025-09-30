@@ -96,6 +96,30 @@
     .btn-outline:hover{ filter:drop-shadow(0 0 10px color-mix(in oklab, var(--accent) 30%, transparent)); transform:translateY(-2px) }
     .btn-danger{ background:linear-gradient(90deg,#ef4444,#fb7185); color:#1b0b0b; }
 
+/* Mini-tabela dentro das células (Dia A/B/C) */
+.cell-table{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 12px;
+  align-items:center;
+}
+.cell-table .cell-th{
+  font-weight:700;
+  color:#fff;           /* em tema escuro; ajuste se preferir */
+  background: linear-gradient(90deg, color-mix(in oklab, var(--primary, #7c3aed) 45%, transparent),
+                                     color-mix(in oklab, var(--accent, #06b6d4) 45%, transparent));
+  padding:6px 8px;
+  border-radius:8px;
+}
+.cell-table .cell-tr{
+  border-bottom:1px dashed var(--border, rgba(255,255,255,.15));
+  padding:6px 0;
+}
+.cell-table .cell-tr:last-child{ border-bottom:none; }
+.cell-table .name{ font-weight:600; }
+.cell-table .reps{ color:var(--muted, #b7bde6); white-space:nowrap; }
+
+    
     /* Toggle de tema */
     .theme-toggle{
       display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px;
@@ -176,38 +200,162 @@
       </div>
       <div class="muted">Faça login para registrar/visualizar suas atividades. Seus dados ficam no Firestore da sua conta.</div>
       <div style="overflow:auto;margin-top:14px">
-        <table>
-          <tr>
-            <th>Semana</th>
-            <th>Dia A – Ombro + Peito</th>
-            <th>Dia B – Costas + Bíceps</th>
-            <th>Dia C – Pernas + Tríceps + Core</th>
-          </tr>
-          <tr>
-            <td>1 – Adaptação</td>
-            <td>Rot. ext/int 3x12–15; Elevação lat 3x12–15; Desenvolv. 2x12–15; Supino 2x12–15; Flexão 2x falha</td>
-            <td>Remada 3x12–15; Puxada 3x12–15; Face pull 3x12–15; Rosca direta 2x12–15; Rosca martelo 2x12–15</td>
-            <td>Agacha 3x12–15; Afundo 2x12–15; Terra romeno 2x12–15; Tríceps testa 2x12–15; Mergulho 2x falha; Prancha 3x30s; Infra 3x12–15</td>
-          </tr>
-          <tr>
-            <td>2 – Consolidação</td>
-            <td>Rot. ext/int 3x12; Elevação lat 3x12; Desenvolv. 3x10–12; Supino 3x10–12; Flexão 3x falha</td>
-            <td>Remada 3x10–12; Puxada 3x10–12; Face pull 3x12; Rosca direta 3x10–12; Rosca martelo 3x10–12</td>
-            <td>Agacha 3x10–12; Afundo 3x10–12; Terra romeno 3x10–12; Tríceps testa 3x10–12; Mergulho 3x falha; Prancha 3x35s; Infra 3x12</td>
-          </tr>
-          <tr>
-            <td>3 – Progressão</td>
-            <td>Rot. ext/int 3x12; Elevação lat 4x10; Desenvolv. 4x8–10; Supino 4x8–10; Flexão 3x falha</td>
-            <td>Remada 4x8–10; Puxada 4x8–10; Face pull 3x12; Rosca direta 3x10; Rosca martelo 3x10</td>
-            <td>Agacha 4x8–10; Afundo 3x10; Terra romeno 3x8–10; Tríceps testa 3x10; Mergulho 3x falha; Prancha 3x40s; Infra 3x12</td>
-          </tr>
-          <tr>
-            <td>4 – Choque</td>
-            <td>Rot. ext/int 3x15; Elevação lat 4x12 (drop); Desenvolv. 4x10–12 (drop); Supino 4x10–12 (drop); Flexão 4x falha</td>
-            <td>Remada 4x10–12 (drop); Puxada 4x10–12 (drop); Face pull 4x12; Rosca direta 4x12 (drop); Rosca martelo 4x12</td>
-            <td>Agacha 4x10–12 (drop); Afundo 3x12; Terra romeno 4x10; Tríceps testa 4x12 (drop); Mergulho 4x falha; Prancha 3x45s; Infra 3x15</td>
-          </tr>
-        </table>
+<table>
+  <tr>
+    <th>Semana</th>
+    <th>Dia A – Ombro + Peito</th>
+    <th>Dia B – Costas + Bíceps</th>
+    <th>Dia C – Pernas + Tríceps + Core</th>
+  </tr>
+
+  <!-- Semana 1 -->
+  <tr>
+    <td>1 – Adaptação</td>
+    <td>
+      <div class="cell-table">
+        <div class="cell-th">Exercício</div><div class="cell-th">Séries × Reps</div>
+        <div class="cell-tr"><div class="name">Rotação ext/int</div><div class="reps">3×12–15</div></div>
+        <div class="cell-tr"><div class="name">Elevação lateral</div><div class="reps">3×12–15</div></div>
+        <div class="cell-tr"><div class="name">Desenvolvimento</div><div class="reps">2×12–15</div></div>
+        <div class="cell-tr"><div class="name">Supino reto</div><div class="reps">2×12–15</div></div>
+        <div class="cell-tr"><div class="name">Flexão de braço</div><div class="reps">2×falha</div></div>
+      </div>
+    </td>
+    <td>
+      <div class="cell-table">
+        <div class="cell-th">Exercício</div><div class="cell-th">Séries × Reps</div>
+        <div class="cell-tr"><div class="name">Remada</div><div class="reps">3×12–15</div></div>
+        <div class="cell-tr"><div class="name">Puxada</div><div class="reps">3×12–15</div></div>
+        <div class="cell-tr"><div class="name">Face pull</div><div class="reps">3×12–15</div></div>
+        <div class="cell-tr"><div class="name">Rosca direta</div><div class="reps">2×12–15</div></div>
+        <div class="cell-tr"><div class="name">Rosca martelo</div><div class="reps">2×12–15</div></div>
+      </div>
+    </td>
+    <td>
+      <div class="cell-table">
+        <div class="cell-th">Exercício</div><div class="cell-th">Séries × Reps</div>
+        <div class="cell-tr"><div class="name">Agachamento</div><div class="reps">3×12–15</div></div>
+        <div class="cell-tr"><div class="name">Afundo</div><div class="reps">2×12–15</div></div>
+        <div class="cell-tr"><div class="name">Terra romeno</div><div class="reps">2×12–15</div></div>
+        <div class="cell-tr"><div class="name">Tríceps testa</div><div class="reps">2×12–15</div></div>
+        <div class="cell-tr"><div class="name">Mergulho no banco</div><div class="reps">2×falha</div></div>
+        <div class="cell-tr"><div class="name">Prancha</div><div class="reps">3×30s</div></div>
+        <div class="cell-tr"><div class="name">Abdominal infra</div><div class="reps">3×12–15</div></div>
+      </div>
+    </td>
+  </tr>
+
+  <!-- Semana 2 -->
+  <tr>
+    <td>2 – Consolidação</td>
+    <td>
+      <div class="cell-table">
+        <div class="cell-th">Exercício</div><div class="cell-th">Séries × Reps</div>
+        <div class="cell-tr"><div class="name">Rotação ext/int</div><div class="reps">3×12</div></div>
+        <div class="cell-tr"><div class="name">Elevação lateral</div><div class="reps">3×12</div></div>
+        <div class="cell-tr"><div class="name">Desenvolvimento</div><div class="reps">3×10–12</div></div>
+        <div class="cell-tr"><div class="name">Supino reto</div><div class="reps">3×10–12</div></div>
+        <div class="cell-tr"><div class="name">Flexão de braço</div><div class="reps">3×falha</div></div>
+      </div>
+    </td>
+    <td>
+      <div class="cell-table">
+        <div class="cell-th">Exercício</div><div class="cell-th">Séries × Reps</div>
+        <div class="cell-tr"><div class="name">Remada</div><div class="reps">3×10–12</div></div>
+        <div class="cell-tr"><div class="name">Puxada</div><div class="reps">3×10–12</div></div>
+        <div class="cell-tr"><div class="name">Face pull</div><div class="reps">3×12</div></div>
+        <div class="cell-tr"><div class="name">Rosca direta</div><div class="reps">3×10–12</div></div>
+        <div class="cell-tr"><div class="name">Rosca martelo</div><div class="reps">3×10–12</div></div>
+      </div>
+    </td>
+    <td>
+      <div class="cell-table">
+        <div class="cell-th">Exercício</div><div class="cell-th">Séries × Reps</div>
+        <div class="cell-tr"><div class="name">Agachamento</div><div class="reps">3×10–12</div></div>
+        <div class="cell-tr"><div class="name">Afundo</div><div class="reps">3×10–12</div></div>
+        <div class="cell-tr"><div class="name">Terra romeno</div><div class="reps">3×10–12</div></div>
+        <div class="cell-tr"><div class="name">Tríceps testa</div><div class="reps">3×10–12</div></div>
+        <div class="cell-tr"><div class="name">Mergulho no banco</div><div class="reps">3×falha</div></div>
+        <div class="cell-tr"><div class="name">Prancha</div><div class="reps">3×35s</div></div>
+        <div class="cell-tr"><div class="name">Abdominal infra</div><div class="reps">3×12</div></div>
+      </div>
+    </td>
+  </tr>
+
+  <!-- Semana 3 -->
+  <tr>
+    <td>3 – Progressão</td>
+    <td>
+      <div class="cell-table">
+        <div class="cell-th">Exercício</div><div class="cell-th">Séries × Reps</div>
+        <div class="cell-tr"><div class="name">Rotação ext/int</div><div class="reps">3×12</div></div>
+        <div class="cell-tr"><div class="name">Elevação lateral</div><div class="reps">4×10</div></div>
+        <div class="cell-tr"><div class="name">Desenvolvimento</div><div class="reps">4×8–10</div></div>
+        <div class="cell-tr"><div class="name">Supino reto</div><div class="reps">4×8–10</div></div>
+        <div class="cell-tr"><div class="name">Flexão de braço</div><div class="reps">3×falha</div></div>
+      </div>
+    </td>
+    <td>
+      <div class="cell-table">
+        <div class="cell-th">Exercício</div><div class="cell-th">Séries × Reps</div>
+        <div class="cell-tr"><div class="name">Remada</div><div class="reps">4×8–10</div></div>
+        <div class="cell-tr"><div class="name">Puxada</div><div class="reps">4×8–10</div></div>
+        <div class="cell-tr"><div class="name">Face pull</div><div class="reps">3×12</div></div>
+        <div class="cell-tr"><div class="name">Rosca direta</div><div class="reps">3×10</div></div>
+        <div class="cell-tr"><div class="name">Rosca martelo</div><div class="reps">3×10</div></div>
+      </div>
+    </td>
+    <td>
+      <div class="cell-table">
+        <div class="cell-th">Exercício</div><div class="cell-th">Séries × Reps</div>
+        <div class="cell-tr"><div class="name">Agachamento</div><div class="reps">4×8–10</div></div>
+        <div class="cell-tr"><div class="name">Afundo</div><div class="reps">3×10</div></div>
+        <div class="cell-tr"><div class="name">Terra romeno</div><div class="reps">3×8–10</div></div>
+        <div class="cell-tr"><div class="name">Tríceps testa</div><div class="reps">3×10</div></div>
+        <div class="cell-tr"><div class="name">Mergulho no banco</div><div class="reps">3×falha</div></div>
+        <div class="cell-tr"><div class="name">Prancha</div><div class="reps">3×40s</div></div>
+        <div class="cell-tr"><div class="name">Abdominal infra</div><div class="reps">3×12</div></div>
+      </div>
+    </td>
+  </tr>
+
+  <!-- Semana 4 -->
+  <tr>
+    <td>4 – Choque</td>
+    <td>
+      <div class="cell-table">
+        <div class="cell-th">Exercício</div><div class="cell-th">Séries × Reps</div>
+        <div class="cell-tr"><div class="name">Rotação ext/int</div><div class="reps">3×15</div></div>
+        <div class="cell-tr"><div class="name">Elevação lateral</div><div class="reps">4×12 (drop)</div></div>
+        <div class="cell-tr"><div class="name">Desenvolvimento</div><div class="reps">4×10–12 (drop)</div></div>
+        <div class="cell-tr"><div class="name">Supino reto</div><div class="reps">4×10–12 (drop)</div></div>
+        <div class="cell-tr"><div class="name">Flexão de braço</div><div class="reps">4×falha</div></div>
+      </div>
+    </td>
+    <td>
+      <div class="cell-table">
+        <div class="cell-th">Exercício</div><div class="cell-th">Séries × Reps</div>
+        <div class="cell-tr"><div class="name">Remada</div><div class="reps">4×10–12 (drop)</div></div>
+        <div class="cell-tr"><div class="name">Puxada</div><div class="reps">4×10–12 (drop)</div></div>
+        <div class="cell-tr"><div class="name">Face pull</div><div class="reps">4×12</div></div>
+        <div class="cell-tr"><div class="name">Rosca direta</div><div class="reps">4×12 (drop)</div></div>
+        <div class="cell-tr"><div class="name">Rosca martelo</div><div class="reps">4×12</div></div>
+      </div>
+    </td>
+    <td>
+      <div class="cell-table">
+        <div class="cell-th">Exercício</div><div class="cell-th">Séries × Reps</div>
+        <div class="cell-tr"><div class="name">Agachamento</div><div class="reps">4×10–12 (drop)</div></div>
+        <div class="cell-tr"><div class="name">Afundo</div><div class="reps">3×12</div></div>
+        <div class="cell-tr"><div class="name">Terra romeno</div><div class="reps">4×10</div></div>
+        <div class="cell-tr"><div class="name">Tríceps testa</div><div class="reps">4×12 (drop)</div></div>
+        <div class="cell-tr"><div class="name">Mergulho no banco</div><div class="reps">4×falha</div></div>
+        <div class="cell-tr"><div class="name">Prancha</div><div class="reps">3×45s</div></div>
+        <div class="cell-tr"><div class="name">Abdominal infra</div><div class="reps">3×15</div></div>
+      </div>
+    </td>
+  </tr>
+</table>
       </div>
     </section>
 
