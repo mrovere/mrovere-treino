@@ -1,67 +1,72 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Plano de Treino – 4 Semanas</title>
 
-  <!-- Fonts modernas -->
+  <!-- Cor da barra do navegador (atualizada via JS conforme tema) -->
+  <meta name="theme-color" content="#0f1226" id="meta-theme-color">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ================= THEMES ================= */
     :root{
-      /* Paleta vibrante e “futurista” */
-      --bg-1:#0f1226;         /* fundo base escuro azulado */
-      --bg-2:#14183b;         /* fundo cards translúcidos */
-      --txt:#e6e9ff;          /* texto principal */
-      --muted:#b7bde6;        /* texto secundário */
-      --primary:#8b5cf6;      /* roxo elétrico */
-      --primary-2:#06b6d4;    /* ciano */
-      --accent:#22d3ee;       /* ciano claro */
-      --danger:#ff6b6b;
-      --glass:rgba(255,255,255,.08);
-      --border:rgba(255,255,255,.15);
-      --shadow: 0 8px 30px rgba(2,8,23,.35);
       --radius:16px;
+      /* dark/neon (default) */
+      --bg-1:#0f1226; --bg-2:#14183b;
+      --txt:#e6e9ff; --muted:#b7bde6;
+      --primary:#8b5cf6; --accent:#22d3ee;
+      --border:rgba(255,255,255,.15); --shadow:0 8px 30px rgba(2,8,23,.35);
+    }
+    html[data-theme="light"]{
+      --bg-1:#f6f8ff; --bg-2:#ffffff;
+      --txt:#0b1027; --muted:#3b4c7a;
+      --primary:#7c3aed; --accent:#06b6d4;
+      --border:rgba(0,0,0,.12); --shadow:0 8px 28px rgba(10,14,35,.08);
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{box-sizing:border-box} html,body{height:100%}
     body{
       margin:0; color:var(--txt);
       font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto;
       background:
-        radial-gradient(1200px 800px at 10% -10%, #1b1f46 0%, transparent 60%),
-        radial-gradient(1200px 800px at 110% 10%, #0a373f 0%, transparent 50%),
-        linear-gradient(180deg,#0f1226 0%, #0b0e1f 100%);
+        radial-gradient(1200px 800px at 10% -10%, rgba(27,31,70,.6) 0%, transparent 60%),
+        radial-gradient(1200px 800px at 110% 10%, rgba(10,55,63,.5) 0%, transparent 50%),
+        linear-gradient(180deg,var(--bg-1) 0%, var(--bg-1) 100%);
       background-attachment: fixed;
+      transition: background .3s ease, color .2s ease;
     }
 
     header{
       position:sticky; top:0; z-index:20;
       backdrop-filter:saturate(160%) blur(14px);
-      background:linear-gradient(90deg, rgba(139,92,246,.15), rgba(34,211,238,.12)) ;
+      background:linear-gradient(90deg, color-mix(in oklab, var(--primary) 20%, transparent),
+                                       color-mix(in oklab, var(--accent) 18%, transparent));
       border-bottom:1px solid var(--border);
-      padding:14px 16px;
-      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      padding:14px 16px; display:flex; gap:12px; align-items:center; justify-content:space-between;
     }
     h1{margin:0; font-size:1.15rem; font-family:'Space Grotesk',sans-serif; letter-spacing:.3px}
-
     main{max-width:1100px; margin:24px auto; padding:0 16px}
 
     .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      background: linear-gradient(180deg, color-mix(in oklab, #fff 8%, transparent), color-mix(in oklab, #fff 3%, transparent));
       border:1px solid var(--border);
       border-radius:var(--radius);
-      padding:22px;
-      margin-bottom:22px;
-      box-shadow: var(--shadow);
+      padding:22px; margin-bottom:22px; box-shadow: var(--shadow);
     }
 
     table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px}
     th,td{padding:10px; vertical-align:top}
     th{
-      background:linear-gradient(90deg, rgba(139,92,246,.35), rgba(34,211,238,.35));
+      background:linear-gradient(90deg, color-mix(in oklab, var(--primary) 45%, transparent),
+                                       color-mix(in oklab, var(--accent) 45%, transparent));
       color:#fff; text-align:left; font-weight:700; font-family:'Space Grotesk',sans-serif;
     }
     td{border-bottom:1px solid var(--border); color:var(--muted)}
@@ -74,58 +79,61 @@
     .btn{
       position:relative;
       background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-      color:#081226;
-      border:none; border-radius:12px;
-      padding:10px 16px; cursor:pointer; font-weight:700; letter-spacing:.2px;
+      color:#061023;
+      border:none; border-radius:12px; padding:10px 16px; cursor:pointer;
+      font-weight:700; letter-spacing:.2px;
       transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-      box-shadow: 0 6px 20px rgba(139,92,246,.35);
+      box-shadow: 0 6px 20px color-mix(in oklab, var(--primary) 35%, transparent);
       will-change: transform, box-shadow;
     }
-    .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 26px rgba(34,211,238,.4) }
+    .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 26px color-mix(in oklab, var(--accent) 40%, transparent) }
     .btn:active{ transform:translateY(0) scale(.98) }
     .btn-outline{
-      background:transparent; color:#dbeafe;
-      border:1px solid rgba(147,197,253,.5);
+      background:transparent; color:color-mix(in oklab, var(--accent) 85%, white);
+      border:1px solid color-mix(in oklab, var(--accent) 55%, var(--border));
       box-shadow:none;
     }
-    .btn-outline:hover{
-      filter:drop-shadow(0 0 10px rgba(147,197,253,.3));
-      transform:translateY(-2px);
-    }
+    .btn-outline:hover{ filter:drop-shadow(0 0 10px color-mix(in oklab, var(--accent) 30%, transparent)); transform:translateY(-2px) }
     .btn-danger{ background:linear-gradient(90deg,#ef4444,#fb7185); color:#1b0b0b; }
+
+    /* Toggle de tema */
+    .theme-toggle{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px;
+      border:1px solid var(--border); background:color-mix(in oklab, #fff 5%, transparent);
+      cursor:pointer; font-weight:600; color:var(--txt);
+    }
+    .theme-toggle svg{width:18px;height:18px}
 
     .chip{
       display:inline-block; padding:6px 10px; border-radius:999px;
-      background:linear-gradient(90deg, rgba(139,92,246,.25), rgba(34,211,238,.25));
-      color:#e9edff; font-size:.85rem; letter-spacing:.2px;
+      background:linear-gradient(90deg, color-mix(in oklab, var(--primary) 25%, transparent),
+                                       color-mix(in oklab, var(--accent) 25%, transparent));
+      color:#f0f6ff; font-size:.85rem; letter-spacing:.2px;
     }
-
     .activity{border-bottom:1px dashed var(--border); padding:10px 0}
 
-    /* Modal (popup) glassmorphism */
+    /* Modal */
     .modal-backdrop{
       position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:50;
-      background:rgba(4,8,22,.55); backdrop-filter: blur(8px);
-      padding:16px;
+      background:rgba(4,8,22,.55); backdrop-filter: blur(8px); padding:16px;
     }
     .modal{
       width:100%; max-width:780px; border-radius:20px;
-      background: linear-gradient(180deg, rgba(17,24,39,.85), rgba(17,24,39,.75));
-      border:1px solid var(--border); box-shadow:0 18px 60px rgba(0,0,0,.5); overflow:hidden;
-      animation:pop .16s ease;
+      background: linear-gradient(180deg, color-mix(in oklab, var(--bg-2) 90%, #000), color-mix(in oklab, var(--bg-2) 80%, #000));
+      border:1px solid var(--border); box-shadow:0 18px 60px rgba(0,0,0,.5); overflow:hidden; animation:pop .16s ease;
     }
     @keyframes pop{from{transform:scale(.98); opacity:.8} to{transform:scale(1); opacity:1}}
     .modal header{display:flex; align-items:center; gap:10px; padding:16px 18px; border-bottom:1px solid var(--border)}
     .modal .content{padding:18px}
-    .modal .footer{padding:16px 18px; border-top:1px solid var(--border); display:flex; gap:10px; justify-content:flex-end; background:rgba(255,255,255,.02)}
+    .modal .footer{padding:16px 18px; border-top:1px solid var(--border); display:flex; gap:10px; justify-content:flex-end; background:color-mix(in oklab,#fff 2%, transparent)}
 
     .form-field label{display:block; font-weight:700; margin-bottom:6px; font-family:'Space Grotesk',sans-serif}
     .form-field select, .form-field input{
       width:100%; padding:12px 12px; border-radius:12px;
-      border:1px solid var(--border); background:rgba(255,255,255,.05); color:var(--txt);
+      border:1px solid var(--border); background:color-mix(in oklab,#fff 5%, transparent); color:var(--txt);
       outline:none; transition:border .15s ease, box-shadow .15s ease;
     }
-    .form-field select:focus, .form-field input:focus{ border-color:var(--accent); box-shadow:0 0 0 3px rgba(34,211,238,.25) }
+    .form-field select:focus, .form-field input:focus{ border-color:var(--accent); box-shadow:0 0 0 3px color-mix(in oklab, var(--accent) 25%, transparent) }
 
     .exercise-row{
       display:grid; grid-template-columns:1fr 140px 140px; gap:12px; align-items:center;
@@ -133,18 +141,20 @@
     }
     .exercise-row:last-child{border-bottom:none}
 
-    /* Canvas charts fundo “escuro” */
-    canvas{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid var(--border); border-radius:14px; padding:10px}
+    canvas{background:linear-gradient(180deg, color-mix(in oklab,#fff 4%, transparent), color-mix(in oklab,#fff 2%, transparent)); border:1px solid var(--border); border-radius:14px; padding:10px}
 
-    @media (max-width:780px){
-      .exercise-row{grid-template-columns:1fr 1fr 1fr}
-    }
+    @media (max-width:780px){ .exercise-row{grid-template-columns:1fr 1fr 1fr} }
   </style>
 </head>
 <body>
   <header>
     <h1>🏋️ Plano de Treino – 4 Semanas</h1>
     <div class="row">
+      <button id="btnTheme" class="theme-toggle" title="Alternar tema">
+        <!-- ícone muda via JS -->
+        <span id="themeIcon"></span>
+        <span id="themeLabel">Neon</span>
+      </button>
       <span id="userInfo" class="muted">Deslogado</span>
       <button id="btnLogin" class="btn">Entrar com Google</button>
       <button id="btnLogout" class="btn btn-outline" style="display:none">Sair</button>
@@ -222,10 +232,11 @@
         <div style="flex:1 1 360px">
           <h3 class="muted" style="margin:6px 0 8px">Tendência de um exercício</h3>
           <div class="row" style="gap:10px;margin-bottom:8px">
-            <input id="filterEx" placeholder="Ex.: Supino reto" class="form-input" style="flex:1; padding:10px; border-radius:10px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--txt)">
+            <input id="filterEx" placeholder="Ex.: Supino reto" class="form-input" style="flex:1; padding:10px; border-radius:10px; border:1px solid var(--border); background:color-mix(in oklab,#fff 4%, transparent); color:var(--txt)">
             <button class="btn btn-outline" id="btnFiltrar">Plotar</button>
           </div>
           <canvas id="chartExercicio" height="220"></canvas>
+          <div class="muted">Use o nome exatamente como registrou.</div>
         </div>
         <div style="flex:1 1 260px">
           <h3 class="muted" style="margin:6px 0 8px">Estatísticas</h3>
@@ -287,10 +298,7 @@
 
   <!-- Firebase SDKs (modular) + App -->
   <script type="module">
-    /* =======================
-       Firebase Config (seu)
-       ======================= */
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    /* ================= FIREBASE CONFIG ================= */
     const firebaseConfig = {
       apiKey: "AIzaSyDmxVS3YbIEZ6E6E6pYnlqEYSnlh2-1-c0",
       authDomain: "mrovere-treino.firebaseapp.com",
@@ -320,7 +328,40 @@
     enableIndexedDbPersistence(db).catch(()=>{});
     await setPersistence(auth, browserLocalPersistence);
 
-    /* ============ Estado/Helpers ============ */
+    /* ============ Tema (toggle + persistência) ============ */
+    const THEME_KEY = "app-theme";
+    const themeBtn = document.getElementById("btnTheme");
+    const themeIcon = document.getElementById("themeIcon");
+    const themeLabel = document.getElementById("themeLabel");
+    const metaTheme = document.getElementById("meta-theme-color");
+
+    function setTheme(mode){
+      document.documentElement.setAttribute("data-theme", mode);
+      localStorage.setItem(THEME_KEY, mode);
+      // ícone + label + theme-color
+      if(mode==="light"){
+        themeIcon.innerHTML = "☀️";
+        themeLabel.textContent = "Claro";
+        metaTheme.setAttribute("content","#f6f8ff");
+      }else{
+        themeIcon.innerHTML = "🌙";
+        themeLabel.textContent = "Neon";
+        metaTheme.setAttribute("content","#0f1226");
+      }
+    }
+    // inicializar tema (pref salvo ou preferência do sistema)
+    const saved = localStorage.getItem(THEME_KEY);
+    if(saved){ setTheme(saved); }
+    else{
+      const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+      setTheme(prefersLight ? "light" : "dark");
+    }
+    themeBtn.addEventListener("click", ()=>{
+      const current = document.documentElement.getAttribute("data-theme");
+      setTheme(current==="dark" ? "light" : "dark");
+    });
+
+    /* ============ Estado/Helpers (restante do app) ============ */
     let UID = null, chSemanas, chGrupos, chEx;
     const $ = s=>document.querySelector(s), byId=id=>document.getElementById(id);
     const fmtDate = iso => !iso ? "" : new Date(iso+"T00:00:00").toLocaleDateString("pt-BR");
@@ -328,28 +369,19 @@
     const weekKey = iso => { const d=new Date(iso+"T00:00:00"), one=new Date(d.getFullYear(),0,1); return d.getFullYear()+"-S"+String(Math.ceil((((d-one)/86400000)+one.getDay()+1)/7)).padStart(2,"0"); };
     const sum = a=>a.reduce((x,y)=>x+y,0);
 
-    // Plano base (exercícios por semana/dia)
     const PLAN = {
-      "Semana 1": {
-        A: ["Rotação externa/interna","Elevação lateral","Desenvolvimento","Supino reto","Flexão de braço"],
-        B: ["Remada curvada","Puxada na frente","Face pull","Rosca direta","Rosca martelo"],
-        C: ["Agachamento","Afundo","Terra romeno","Tríceps testa","Mergulho banco","Prancha","Abdominal infra"]
-      },
-      "Semana 2": {
-        A: ["Rotação externa/interna","Elevação lateral","Desenvolvimento","Supino reto","Flexão de braço"],
-        B: ["Remada curvada","Puxada na frente","Face pull","Rosca direta","Rosca martelo"],
-        C: ["Agachamento","Afundo","Terra romeno","Tríceps testa","Mergulho banco","Prancha","Abdominal infra"]
-      },
-      "Semana 3": {
-        A: ["Rotação externa/interna","Elevação lateral","Desenvolvimento","Supino reto","Flexão de braço"],
-        B: ["Remada curvada","Puxada na frente","Face pull","Rosca direta","Rosca martelo"],
-        C: ["Agachamento","Afundo","Terra romeno","Tríceps testa","Mergulho banco","Prancha","Abdominal infra"]
-      },
-      "Semana 4": {
-        A: ["Rotação externa/interna","Elevação lateral","Desenvolvimento","Supino reto","Flexão de braço"],
-        B: ["Remada curvada","Puxada na frente","Face pull","Rosca direta","Rosca martelo"],
-        C: ["Agachamento","Afundo","Terra romeno","Tríceps testa","Mergulho banco","Prancha","Abdominal infra"]
-      }
+      "Semana 1": { A:["Rotação externa/interna","Elevação lateral","Desenvolvimento","Supino reto","Flexão de braço"],
+                    B:["Remada curvada","Puxada na frente","Face pull","Rosca direta","Rosca martelo"],
+                    C:["Agachamento","Afundo","Terra romeno","Tríceps testa","Mergulho banco","Prancha","Abdominal infra"] },
+      "Semana 2": { A:["Rotação externa/interna","Elevação lateral","Desenvolvimento","Supino reto","Flexão de braço"],
+                    B:["Remada curvada","Puxada na frente","Face pull","Rosca direta","Rosca martelo"],
+                    C:["Agachamento","Afundo","Terra romeno","Tríceps testa","Mergulho banco","Prancha","Abdominal infra"] },
+      "Semana 3": { A:["Rotação externa/interna","Elevação lateral","Desenvolvimento","Supino reto","Flexão de braço"],
+                    B:["Remada curvada","Puxada na frente","Face pull","Rosca direta","Rosca martelo"],
+                    C:["Agachamento","Afundo","Terra romeno","Tríceps testa","Mergulho banco","Prancha","Abdominal infra"] },
+      "Semana 4": { A:["Rotação externa/interna","Elevação lateral","Desenvolvimento","Supino reto","Flexão de braço"],
+                    B:["Remada curvada","Puxada na frente","Face pull","Rosca direta","Rosca martelo"],
+                    C:["Agachamento","Afundo","Terra romeno","Tríceps testa","Mergulho banco","Prancha","Abdominal infra"] },
     };
     const DIA_TO_GRUPO = { A:"Ombro + Peito", B:"Costas + Bíceps", C:"Pernas + Tríceps + Core" };
 
@@ -381,6 +413,7 @@
     });
 
     /* ============ Firestore CRUD ============ */
+    import { getDocs as _gd } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"; // alias só p/ bundlers não confundirem
     async function fetchActivities(){
       if(!UID) return [];
       const qRef = query(collection(db,"users",UID,"activities"), orderBy("data","desc"));
@@ -392,13 +425,9 @@
       await addDoc(collection(db,"users",UID,"activities"), payload);
     }
     async function deleteActivity(id){ await deleteDoc(doc(db,"users",UID,"activities",id)); }
+    function calcVolumeBySets(sets){ return (sets||[]).reduce((t,s)=> t + Number(s.series?.[0]?.carga||0), 0); }
 
-    function calcVolumeBySets(sets){
-      // volume simples: soma das cargas (sem reps) dos exercícios marcados
-      return (sets||[]).reduce((t,s)=> t + Number(s.series?.[0]?.carga||0), 0);
-    }
-
-    /* ============ Modal (Adicionar atividade) ============ */
+    /* ============ Modal Adicionar ============ */
     const modal = byId("modalAdd"), btnAdd=byId("btnAdd"), btnCloseModal=byId("btnCloseModal");
     const selSemana=byId("selSemana"), selDia=byId("selDia"), selData=byId("selData");
     const exerciseList=byId("exerciseList"), btnSaveModal=byId("btnSaveModal"), btnClearModal=byId("btnClearModal"), inpObs=byId("inpObs");
@@ -470,9 +499,7 @@
         el.innerHTML = `
           <div>
             <b>${fmtDate(a.data)}</b> · <span class="chip">${a.fase}</span> <span class="chip">${a.grupo}</span>
-            <span class="right">
-              <button class="btn btn-outline btn-danger" data-del="${a.id}">Excluir</button>
-            </span>
+            <span class="right"><button class="btn btn-outline btn-danger" data-del="${a.id}">Excluir</button></span>
           </div>
           <div class="muted">Volume (kg): <b>${vol.toFixed(1)}</b></div>
           <div style="margin-top:6px">
@@ -493,10 +520,12 @@
 
     /* ============ Dashboard (Chart.js) ============ */
     function palette(n){
-      const base = ['#8b5cf6','#06b6d4','#10b981','#f59e0b','#ef4444','#22d3ee','#a78bfa','#34d399'];
-      const arr=[]; for(let i=0;i<n;i++) arr.push(base[i%base.length]); return arr;
+      const baseDark = ['#8b5cf6','#06b6d4','#10b981','#f59e0b','#ef4444','#22d3ee','#a78bfa','#34d399'];
+      const baseLight= ['#7c3aed','#0891b2','#059669','#d97706','#dc2626','#06b6d4','#8b5cf6','#16a34a'];
+      const isLight = document.documentElement.getAttribute("data-theme")==="light";
+      const src = isLight ? baseLight : baseDark;
+      const arr=[]; for(let i=0;i<n;i++) arr.push(src[i%src.length]); return arr;
     }
-
     async function renderDash(){
       if(!UID) return;
       const atividades = await fetchActivities();
@@ -524,15 +553,18 @@
       const ctxG = byId("chartGrupos").getContext("2d");
       if(chSemanas) chSemanas.destroy(); if(chGrupos) chGrupos.destroy();
 
+      const axisColor = document.documentElement.getAttribute("data-theme")==="light" ? '#334155' : '#c7d2fe';
+      const legendColor = document.documentElement.getAttribute("data-theme")==="light" ? '#0f172a' : '#e2e8f0';
+
       chSemanas = new Chart(ctxS,{
         type:"bar",
         data:{ labels:sLabels, datasets:[{ label:"Treinos/semana", data:sVals, backgroundColor:palette(sVals.length)}] },
-        options:{ responsive:true, scales:{ y:{ beginAtZero:true, ticks:{color:'#c7d2fe'}}, x:{ticks:{color:'#c7d2fe'}}}, plugins:{legend:{labels:{color:'#e2e8f0'}}}}
+        options:{ responsive:true, scales:{ y:{ beginAtZero:true, ticks:{color:axisColor}}, x:{ticks:{color:axisColor}}}, plugins:{legend:{labels:{color:legendColor}}}}
       });
       chGrupos  = new Chart(ctxG,{
         type:"pie",
         data:{ labels:gLabels, datasets:[{ label:"Volume (kg)", data:gVals, backgroundColor:palette(gVals.length)}] },
-        options:{ responsive:true, plugins:{legend:{labels:{color:'#e2e8f0'}}}}
+        options:{ responsive:true, plugins:{legend:{labels:{color:legendColor}}}}
       });
 
       // Tendência por exercício
@@ -555,10 +587,10 @@
         chEx = new Chart(ctx,{
           type:"line",
           data:{ labels, datasets:[
-            {label:"Soma das cargas (kg)",data:vol, borderColor:"#22d3ee"},
-            {label:"Carga máxima (kg)",data:maxLoad, borderColor:"#a78bfa"}
+            {label:"Soma das cargas (kg)",data:vol, borderColor:palette(1)[0]},
+            {label:"Carga máxima (kg)",data:maxLoad, borderColor:palette(2)[1]}
           ]},
-          options:{ responsive:true, scales:{ y:{ beginAtZero:true, ticks:{color:'#c7d2fe'}}, x:{ticks:{color:'#c7d2fe'}}}, plugins:{legend:{labels:{color:'#e2e8f0'}}}}
+          options:{ responsive:true, scales:{ y:{ beginAtZero:true, ticks:{color:axisColor}}, x:{ticks:{color:axisColor}}}, plugins:{legend:{labels:{color:legendColor}}}}
         });
       };
     }
@@ -586,6 +618,15 @@
       }catch(err){ alert("Erro ao importar JSON."); }
       e.target.value="";
     });
+
+    /* ============ Abrir/fechar modal ============ */
+    const modalEl = document.getElementById("modalAdd");
+    window.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && modalEl.style.display==='flex') modalEl.style.display='none'; });
+
+    /* ============ Registrar Service Worker (PWA) ============ */
+    if ('serviceWorker' in navigator) {
+      try { await navigator.serviceWorker.register('/sw.js'); } catch(err){ console.warn('SW não registrado', err); }
+    }
   </script>
 </body>
 </html>
