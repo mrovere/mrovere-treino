@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Plano de Treino – 4 Semanas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Plano de Treino – 4 Semanas (Firebase)</title>
   <style>
     :root{--azul:#4a90e2;--cinza:#f7f7f7;--borda:#d0d0d0;}
     *{box-sizing:border-box}
     body{font-family:Arial,Helvetica,sans-serif;margin:0;background:var(--cinza);color:#222}
-    header{padding:18px 16px;background:#fff;border-bottom:1px solid var(--borda)}
-    h1{margin:0;text-align:center}
-    main{max-width:1100px;margin:24px auto;padding:0 16px}
+    header{padding:14px;background:#fff;border-bottom:1px solid var(--borda);display:flex;gap:12px;align-items:center;justify-content:space-between}
+    h1{margin:0;font-size:1.15rem}
+    main{max-width:1100px;margin:22px auto;padding:0 16px}
     .card{background:#fff;border:1px solid var(--borda);border-radius:10px;padding:16px;margin-bottom:18px}
     table{width:100%;border-collapse:collapse}
     th,td{border:1px solid #bbb;padding:8px;vertical-align:top}
@@ -25,30 +25,43 @@
     input,select,textarea{width:100%;padding:9px;border:1px solid #ccc;border-radius:6px;margin-top:6px}
     textarea{min-height:90px}
     .muted{color:#666;font-size:.9rem}
-    .row{display:flex;gap:8px;align-items:center}
-    .chip{display:inline-block;padding:4px 8px;border-radius:20px;background:#eef3ff;color:#2c5bbf;margin-right:6px;font-size:.85rem}
-    .right{float:right}
-    .table-sm td,.table-sm th{font-size:.92rem}
     .activity{border-bottom:1px dashed #ddd;padding:8px 0}
-    .nowrap{white-space:nowrap}
+    .chip{display:inline-block;padding:3px 8px;border-radius:18px;background:#eef3ff;color:#2c5bbf;margin-right:6px;font-size:.85rem}
+    .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .right{margin-left:auto}
     .danger{color:#b00020}
     .ok{color:#0c7a35}
     .center{text-align:center}
+    .hidden{display:none}
     @media(max-width:800px){.grid-2,.grid-3{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <header>
-    <h1>📊 Plano de Treino – 4 Semanas</h1>
+    <h1>📊 Plano de Treino – 4 Semanas (Firebase)</h1>
+    <div class="row">
+      <span id="userInfo" class="muted">Deslogado</span>
+      <button id="btnLogin" class="btn">Entrar com Google</button>
+      <button id="btnLogout" class="btn btn-outline hidden">Sair</button>
+    </div>
   </header>
 
   <main>
-    <!-- PLANO -->
+    <!-- PLANO (referência) -->
     <section class="card">
-      <h2 style="margin-top:0">Plano (referência)</h2>
-      <div class="muted">Use como guia. Você pode registrar atividades reais abaixo.</div>
-      <div style="overflow:auto">
-        <table class="table-sm">
+      <div class="row" style="justify-content:space-between">
+        <h2 style="margin:0">Plano (referência)</h2>
+        <div class="row">
+          <button class="btn" id="btnAdd">➕ Adicionar atividade</button>
+          <button class="btn btn-outline" id="btnExport">Backup (JSON)</button>
+          <label class="btn btn-outline">
+            Importar <input type="file" id="importFile" accept="application/json" style="display:none">
+          </label>
+        </div>
+      </div>
+      <div class="muted">Os dados ficam na sua conta (Firestore). Faça login para registrar/visualizar.</div>
+      <div style="overflow:auto;margin-top:10px">
+        <table>
           <tr>
             <th>Semana</th>
             <th>Dia A – Ombro + Peito</th>
@@ -81,37 +94,25 @@
           </tr>
         </table>
       </div>
-      <div style="margin-top:12px">
-        <button class="btn" id="btnAdd">➕ Adicionar atividade</button>
-        <button class="btn btn-outline right" id="btnExport">Backup (Exportar JSON)</button>
-        <label class="right" style="margin-right:8px;">
-          <input type="file" id="importFile" accept="application/json" style="display:none">
-          <span class="btn btn-outline" id="btnImport">Restaurar (Importar JSON)</span>
-        </label>
-        <div style="clear:both"></div>
-        <div class="muted">Os dados ficam salvos neste navegador (localStorage). Faça backup para não perder ao trocar de aparelho.</div>
-      </div>
     </section>
 
     <!-- FORMULÁRIO -->
-    <section class="card" id="formCard" style="display:none">
-      <h2 style="margin-top:0">Nova atividade</h2>
+    <section class="card hidden" id="formCard">
+      <h2 style="margin-top:0" id="formTitle">Nova atividade</h2>
       <div class="grid grid-3">
         <div>
           <label for="fase">Fase (semana)</label>
           <select id="fase">
-            <option value="Semana 1">Semana 1</option>
-            <option value="Semana 2">Semana 2</option>
-            <option value="Semana 3">Semana 3</option>
-            <option value="Semana 4">Semana 4</option>
+            <option>Semana 1</option><option>Semana 2</option>
+            <option>Semana 3</option><option>Semana 4</option>
           </select>
         </div>
         <div>
           <label for="grupo">Grupo muscular</label>
           <select id="grupo">
-            <option value="Ombro + Peito">Ombro + Peito</option>
-            <option value="Costas + Bíceps">Costas + Bíceps</option>
-            <option value="Pernas + Tríceps + Core">Pernas + Tríceps + Core</option>
+            <option>Ombro + Peito</option>
+            <option>Costas + Bíceps</option>
+            <option>Pernas + Tríceps + Core</option>
           </select>
         </div>
         <div>
@@ -125,7 +126,7 @@
       <button class="btn btn-outline" id="btnAddSet" type="button">+ Adicionar exercício</button>
 
       <label for="obs">Observações</label>
-      <textarea id="obs" placeholder="Como se sentiu? Dor? Técnica? Sono/energia?"></textarea>
+      <textarea id="obs" placeholder="Como se sentiu? Técnica? Sono/energia?"></textarea>
 
       <div style="margin-top:12px" class="row">
         <button class="btn" id="btnSave">Concluir e salvar</button>
@@ -133,7 +134,7 @@
       </div>
     </section>
 
-    <!-- ATIVIDADES -->
+    <!-- HISTÓRICO -->
     <section class="card">
       <h2 style="margin-top:0">Histórico</h2>
       <div id="listaAtividades"></div>
@@ -160,353 +161,396 @@
             <button class="btn btn-outline" id="btnFiltrar">Plotar</button>
           </div>
           <canvas id="chartExercicio" height="220"></canvas>
-          <div class="muted">Dica: use o nome do exercício exatamente como registrou.</div>
+          <div class="muted">Use o nome exatamente como registrou.</div>
         </div>
         <div>
-          <h3 class="center" style="margin:4px 0">Estatísticas rápidas</h3>
+          <h3 class="center" style="margin:4px 0">Estatísticas</h3>
           <div id="stats"></div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Chart.js CDN -->
+  <!-- libs -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <script>
-    // ---------- Persistência ----------
-    const KEY = "atividadesTreinoV1";
-
-    const getData = () => JSON.parse(localStorage.getItem(KEY) || "[]");
-    const setData = (arr) => localStorage.setItem(KEY, JSON.stringify(arr));
-
-    // ---------- Utilitários ----------
-    const fmtDate = (iso) => {
-      if(!iso) return "";
-      const d = new Date(iso + "T00:00:00");
-      return d.toLocaleDateString("pt-BR");
+  <!-- Firebase SDKs (modular) -->
+  <script type="module">
+    /* ===========================
+       1) CONFIGURE SEU FIREBASE
+       =========================== */
+    const firebaseConfig = {
+      apiKey: "FIREBASE_API_KEY",
+      authDomain: "FIREBASE_AUTH_DOMAIN",
+      projectId: "FIREBASE_PROJECT_ID",
+      storageBucket: "FIREBASE_STORAGE_BUCKET",
+      messagingSenderId: "FIREBASE_MESSAGING_SENDER_ID",
+      appId: "FIREBASE_APP_ID"
     };
+
+    /* ===========================
+       2) IMPORTS E INIT
+       =========================== */
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import {
+      getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+    import {
+      getFirestore, enableIndexedDbPersistence,
+      collection, addDoc, getDocs, query, orderBy,
+      updateDoc, doc, deleteDoc, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db   = getFirestore(app);
+    enableIndexedDbPersistence(db).catch(()=>{ /* alguns modos privados não suportam */ });
+
+    /* ===========================
+       3) ESTADO E HELPERS
+       =========================== */
+    let UID = null;
+    let editingId = null;
+    let chSemanas, chGrupos, chEx;
+
+    const $ = (sel) => document.querySelector(sel);
+    const byId = (id) => document.getElementById(id);
+    const fmtDate = (iso) => !iso ? "" : new Date(iso+"T00:00:00").toLocaleDateString("pt-BR");
     const weekKey = (iso) => {
-      const d = new Date(iso + "T00:00:00");
-      const year = d.getFullYear();
-      // aproximação simples de semana (YYYY-WW)
-      const onejan = new Date(d.getFullYear(),0,1);
-      const week = Math.ceil((((d - onejan)/86400000) + onejan.getDay()+1)/7);
-      return `${year}-S${String(week).padStart(2,"0")}`;
+      const d=new Date(iso+"T00:00:00"), onejan=new Date(d.getFullYear(),0,1);
+      return d.getFullYear()+"-S"+String(Math.ceil((((d-onejan)/86400000)+onejan.getDay()+1)/7)).padStart(2,"0");
     };
-    const sum = (arr) => arr.reduce((a,b)=>a+b,0);
+    const sum = (a)=>a.reduce((x,y)=>x+y,0);
 
-    // ---------- UI: formulário dinâmico ----------
-    const setsWrap = document.getElementById("setsWrap");
-    function addSetRow(prefill={exercicio:"", series:[{reps:"",carga:""}]}) {
-      const idx = document.querySelectorAll(".set-block").length;
+    function calcVolume(activity){
+      let total=0;
+      (activity.sets||[]).forEach(s=>{
+        (s.series||[]).forEach(x=>{
+          total += (Number(x.reps)||0) * (Number(x.carga)||0);
+        });
+      });
+      return total;
+    }
+
+    /* ===========================
+       4) AUTH (login/logout)
+       =========================== */
+    const userInfo = byId("userInfo");
+    const btnLogin = byId("btnLogin");
+    const btnLogout= byId("btnLogout");
+
+    btnLogin.onclick = async ()=>{
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+    };
+    btnLogout.onclick = ()=> signOut(auth);
+
+    onAuthStateChanged(auth, async (user)=>{
+      if(user){
+        UID = user.uid;
+        userInfo.textContent = `Olá, ${user.displayName || user.email}`;
+        btnLogin.classList.add("hidden");
+        btnLogout.classList.remove("hidden");
+        await renderHistorico();
+        renderDash();
+      }else{
+        UID = null;
+        userInfo.textContent = "Deslogado";
+        btnLogin.classList.remove("hidden");
+        btnLogout.classList.add("hidden");
+        $("#listaAtividades").innerHTML = '<div class="muted">Entre com Google para ver/registrar seus treinos.</div>';
+        resetCharts();
+      }
+    });
+
+    function resetCharts(){
+      if(chSemanas) chSemanas.destroy();
+      if(chGrupos)  chGrupos.destroy();
+      if(chEx)      chEx.destroy();
+    }
+
+    /* ===========================
+       5) FORM DINÂMICO
+       =========================== */
+    const formCard = byId("formCard");
+    const setsWrap = byId("setsWrap");
+
+    byId("btnAdd").onclick = ()=>{
+      if(!UID){ alert("Entre com Google para adicionar atividades."); return; }
+      openForm(); // novo
+    };
+    byId("btnCancel").onclick = closeForm;
+    byId("btnAddSet").onclick = ()=> addSetRow();
+
+    function openForm(activity=null){
+      formCard.classList.remove("hidden");
+      byId("formTitle").textContent = activity ? "Editar atividade" : "Nova atividade";
+      byId("fase").value = activity?.fase || "Semana 1";
+      byId("grupo").value = activity?.grupo || "Ombro + Peito";
+      byId("data").value = activity?.data || new Date().toISOString().slice(0,10);
+      byId("obs").value  = activity?.obs || "";
+      setsWrap.innerHTML = "";
+      (activity?.sets?.length ? activity.sets : [{exercicio:"",series:[{reps:"",carga:""}]}]).forEach(s=>{
+        addSetRow(s);
+      });
+      editingId = activity?.id || null;
+    }
+    function closeForm(){
+      formCard.classList.add("hidden");
+      setsWrap.innerHTML = "";
+      byId("obs").value="";
+      editingId = null;
+    }
+    function addSetRow(prefill={exercicio:"",series:[{reps:"",carga:""}]}){
       const block = document.createElement("div");
-      block.className = "set-block card";
-      block.style.padding = "12px";
-      block.style.marginBottom = "10px";
+      block.className="card";
+      block.style.padding="12px";
       block.innerHTML = `
         <div class="row" style="justify-content:space-between">
           <div style="flex:1">
             <label>Exercício</label>
             <input class="exNome" placeholder="Ex.: Supino reto" value="${prefill.exercicio||""}">
           </div>
-          <button class="btn btn-outline" type="button" onclick="this.closest('.set-block').remove()">Remover</button>
+          <button class="btn btn-outline" type="button">Remover</button>
         </div>
         <div class="seriesWrap"></div>
         <button class="btn btn-outline" type="button">+ Série</button>
       `;
-      const btnAddSerie = block.querySelector("button.btn.btn-outline:last-of-type");
       const seriesWrap = block.querySelector(".seriesWrap");
-
-      function addSerieRow(s={reps:"",carga:""}) {
-        const r = document.createElement("div");
-        r.className="row";
-        r.style.marginTop="8px";
-        r.innerHTML = `
-          <label style="min-width:70px">Reps</label>
-          <input class="reps" type="number" min="0" style="max-width:120px">
-          <label style="min-width:70px">Carga (kg)</label>
-          <input class="carga" type="number" min="0" step="0.5" style="max-width:140px">
-          <button class="btn btn-outline" type="button">–</button>
-        `;
-        r.querySelector(".reps").value = s.reps || "";
-        r.querySelector(".carga").value = s.carga || "";
-        r.querySelector("button").onclick = ()=> r.remove();
-        seriesWrap.appendChild(r);
-      }
-      // preencher séries existentes
-      (prefill.series || [{reps:"",carga:""}]).forEach(addSerieRow);
-      btnAddSerie.onclick = ()=> addSerieRow();
-
+      const btnDel = block.querySelector(".btn.btn-outline");
+      const btnAddSerie = block.querySelectorAll(".btn.btn-outline")[1];
+      btnDel.onclick = ()=> block.remove();
+      btnAddSerie.onclick = ()=> addSerieRow(seriesWrap);
+      (prefill.series||[{reps:"",carga:""}]).forEach(s=> addSerieRow(seriesWrap, s));
       setsWrap.appendChild(block);
     }
+    function addSerieRow(container, s={reps:"",carga:""}){
+      const row = document.createElement("div");
+      row.className="row";
+      row.style.marginTop="8px";
+      row.innerHTML = `
+        <label style="min-width:64px">Reps</label>
+        <input class="reps" type="number" min="0" style="max-width:110px" value="${s.reps||""}">
+        <label style="min-width:90px">Carga (kg)</label>
+        <input class="carga" type="number" min="0" step="0.5" style="max-width:120px" value="${s.carga||""}">
+        <button class="btn btn-outline" type="button">–</button>
+      `;
+      row.querySelector("button").onclick = ()=> row.remove();
+      container.appendChild(row);
+    }
 
-    // ---------- Mostrar/ocultar formulário ----------
-    const formCard = document.getElementById("formCard");
-    document.getElementById("btnAdd").onclick = ()=>{
-      formCard.style.display = "block";
-      if(!setsWrap.querySelector(".set-block")) addSetRow();
-      document.getElementById("data").valueAsDate = new Date();
-    };
-    document.getElementById("btnCancel").onclick = ()=>{
-      formCard.style.display = "none";
-      setsWrap.innerHTML = "";
-      document.getElementById("obs").value = "";
-    };
-    document.getElementById("btnAddSet").onclick = ()=> addSetRow();
+    /* ===========================
+       6) FIRESTORE CRUD
+       =========================== */
+    async function fetchActivities(){
+      if(!UID) return [];
+      const qRef = query(collection(db,"users",UID,"activities"), orderBy("data","desc"));
+      const snap = await getDocs(qRef);
+      return snap.docs.map(d=>({ id:d.id, ...d.data() }));
+    }
+    async function addActivity(payload){
+      if(!UID) throw new Error("Login necessário");
+      payload.createdAt = serverTimestamp();
+      payload.updatedAt = serverTimestamp();
+      await addDoc(collection(db,"users",UID,"activities"), payload);
+    }
+    async function updateActivity(id, payload){
+      payload.updatedAt = serverTimestamp();
+      await updateDoc(doc(db,"users",UID,"activities",id), payload);
+    }
+    async function deleteActivity(id){
+      await deleteDoc(doc(db,"users",UID,"activities",id));
+    }
 
-    // ---------- Salvar atividade ----------
-    document.getElementById("btnSave").onclick = ()=>{
-      const fase = document.getElementById("fase").value;
-      const grupo = document.getElementById("grupo").value;
-      const data = document.getElementById("data").value;
-      const obs = document.getElementById("obs").value;
-
+    // Salvar (criar/editar)
+    byId("btnSave").onclick = async ()=>{
+      if(!UID){ alert("Faça login."); return; }
+      const fase = byId("fase").value;
+      const grupo= byId("grupo").value;
+      const data = byId("data").value;
+      const obs  = byId("obs").value;
       if(!data){ alert("Informe a data."); return; }
 
-      const sets = Array.from(document.querySelectorAll(".set-block")).map(b=>{
+      const sets = Array.from(setsWrap.querySelectorAll(".card")).map(b=>{
         const exercicio = b.querySelector(".exNome").value.trim();
         const series = Array.from(b.querySelectorAll(".seriesWrap .row")).map(r=>{
-          const reps = Number(r.querySelector(".reps").value) || 0;
-          const carga = Number(r.querySelector(".carga").value) || 0;
-          return {reps,carga};
+          const reps  = Number(r.querySelector(".reps").value)||0;
+          const carga = Number(r.querySelector(".carga").value)||0;
+          return {reps, carga};
         }).filter(s=> s.reps>0 || s.carga>0);
         return {exercicio, series};
       }).filter(s=> s.exercicio && s.series.length);
 
       if(!sets.length){ alert("Adicione ao menos um exercício com séries."); return; }
 
-      const atividades = getData();
-      atividades.push({id:crypto.randomUUID(), data, fase, grupo, sets, obs});
-      setData(atividades);
+      const payload = { data, fase, grupo, sets, obs, volume: calcVolume({sets}) };
 
-      // limpar e fechar
-      document.getElementById("btnCancel").click();
-      renderHistorico();
+      if(editingId){ await updateActivity(editingId, payload); }
+      else         { await addActivity(payload); }
+
+      closeForm();
+      await renderHistorico();
       renderDash();
     };
 
-    // ---------- Histórico ----------
-    function calcVolume(atividade){
-      // volume = soma (reps * carga) de todas as séries
-      let total = 0;
-      atividade.sets.forEach(s=>{
-        s.series.forEach(x=> total += (x.reps||0) * (x.carga||0));
-      });
-      return total;
-    }
+    /* ===========================
+       7) HISTÓRICO
+       =========================== */
+    async function renderHistorico(){
+      const cont = byId("listaAtividades");
+      cont.innerHTML = '<div class="muted">Carregando…</div>';
 
-    function renderHistorico(){
-      const cont = document.getElementById("listaAtividades");
-      const atividades = getData().sort((a,b)=> a.data < b.data ? 1 : -1);
-      if(!atividades.length){ cont.innerHTML = '<div class="muted">Sem atividades registradas ainda.</div>'; return; }
+      const atividades = await fetchActivities();
+      if(!atividades.length){ cont.innerHTML = '<div class="muted">Sem atividades ainda.</div>'; return; }
 
       cont.innerHTML = "";
       atividades.forEach(a=>{
-        const vol = calcVolume(a);
-        const div = document.createElement("div");
-        div.className = "activity";
-        div.innerHTML = `
-          <div><b>${fmtDate(a.data)}</b> · <span class="chip">${a.fase}</span> <span class="chip">${a.grupo}</span>
+        const volume = Number(a.volume ?? calcVolume(a));
+        const el = document.createElement("div");
+        el.className = "activity";
+        el.innerHTML = `
+          <div>
+            <b>${fmtDate(a.data)}</b> · <span class="chip">${a.fase}</span> <span class="chip">${a.grupo}</span>
             <span class="right">
-              <button class="btn btn-outline btn-sm" data-id="${a.id}">Editar</button>
-              <button class="btn btn-outline btn-sm danger" data-del="${a.id}">Excluir</button>
+              <button class="btn btn-outline" data-edit="${a.id}">Editar</button>
+              <button class="btn btn-outline danger" data-del="${a.id}">Excluir</button>
             </span>
           </div>
-          <div class="muted">Volume: <b>${vol.toFixed(1)}</b> kg·reps</div>
-          <div style="margin-top:6px">${a.sets.map(s=>{
-            const seriesTxt = s.series.map((x,i)=>`S${i+1}:${x.reps}x${x.carga}kg`).join(" · ");
-            return `<div>• <b>${s.exercicio}</b> — ${seriesTxt}</div>`;
-          }).join("")}</div>
+          <div class="muted">Volume: <b>${volume.toFixed(1)}</b> kg·reps</div>
+          <div style="margin-top:6px">
+            ${(a.sets||[]).map(s=>{
+              const seriesTxt = (s.series||[]).map((x,i)=>`S${i+1}:${x.reps}x${x.carga}kg`).join(" · ");
+              return `<div>• <b>${s.exercicio}</b> — ${seriesTxt}</div>`;
+            }).join("")}
+          </div>
           ${a.obs ? `<div class="muted" style="margin-top:6px">Obs: ${a.obs}</div>` : ""}
         `;
-        // excluir
-        div.querySelector("[data-del]").onclick = (e)=>{
-          const id = e.target.getAttribute("data-del");
-          const arr = getData().filter(x=>x.id!==id);
-          setData(arr);
-          renderHistorico(); renderDash();
+        el.querySelector(`[data-edit="${a.id}"]`).onclick = ()=> openForm(a);
+        el.querySelector(`[data-del="${a.id}"]`).onclick = async ()=>{
+          if(confirm("Excluir esta atividade?")){
+            await deleteActivity(a.id);
+            await renderHistorico(); renderDash();
+          }
         };
-        // editar (carrega no form)
-        div.querySelector("[data-id]").onclick = (e)=>{
-          const id = e.target.getAttribute("data-id");
-          const at = getData().find(x=>x.id===id);
-          if(!at) return;
-          formCard.style.display = "block";
-          document.getElementById("fase").value = at.fase;
-          document.getElementById("grupo").value = at.grupo;
-          document.getElementById("data").value = at.data;
-          document.getElementById("obs").value = at.obs || "";
-          setsWrap.innerHTML="";
-          at.sets.forEach(s=> addSetRow({exercicio:s.exercicio, series:s.series}));
-          // ao salvar, substitui
-          document.getElementById("btnSave").onclick = ()=>{
-            const fase = document.getElementById("fase").value;
-            const grupo = document.getElementById("grupo").value;
-            const data = document.getElementById("data").value;
-            const obs = document.getElementById("obs").value;
-            if(!data){ alert("Informe a data."); return; }
-            const sets = Array.from(document.querySelectorAll(".set-block")).map(b=>{
-              const exercicio = b.querySelector(".exNome").value.trim();
-              const series = Array.from(b.querySelectorAll(".seriesWrap .row")).map(r=>{
-                const reps = Number(r.querySelector(".reps").value) || 0;
-                const carga = Number(r.querySelector(".carga").value) || 0;
-                return {reps,carga};
-              }).filter(s=> s.reps>0 || s.carga>0);
-              return {exercicio, series};
-            }).filter(s=> s.exercicio && s.series.length);
-
-            if(!sets.length){ alert("Adicione ao menos um exercício com séries."); return; }
-
-            const arr = getData().map(x=> x.id===id ? ({...x, data, fase, grupo, sets, obs}) : x);
-            setData(arr);
-            document.getElementById("btnCancel").click();
-            // volta o handler padrão
-            resetSaveHandler();
-            renderHistorico(); renderDash();
-          };
-        };
-        cont.appendChild(div);
+        cont.appendChild(el);
       });
     }
 
-    function resetSaveHandler(){
-      document.getElementById("btnSave").onclick = ()=>{
-        const fase = document.getElementById("fase").value;
-        const grupo = document.getElementById("grupo").value;
-        const data = document.getElementById("data").value;
-        const obs = document.getElementById("obs").value;
-        if(!data){ alert("Informe a data."); return; }
-        const sets = Array.from(document.querySelectorAll(".set-block")).map(b=>{
-          const exercicio = b.querySelector(".exNome").value.trim();
-          const series = Array.from(b.querySelectorAll(".seriesWrap .row")).map(r=>{
-            const reps = Number(r.querySelector(".reps").value) || 0;
-            const carga = Number(r.querySelector(".carga").value) || 0;
-            return {reps,carga};
-          }).filter(s=> s.reps>0 || s.carga>0);
-          return {exercicio, series};
-        }).filter(s=> s.exercicio && s.series.length);
+    /* ===========================
+       8) DASHBOARD (Chart.js)
+       =========================== */
+    async function renderDash(){
+      if(!UID) return;
+      const atividades = await fetchActivities();
 
-        const atividades = getData();
-        atividades.push({id:crypto.randomUUID(), data, fase, grupo, sets, obs});
-        setData(atividades);
-        document.getElementById("btnCancel").click();
-        renderHistorico(); renderDash();
-      };
-    }
-
-    // ---------- Dashboard (Chart.js) ----------
-    let chSemanas, chGrupos, chEx;
-    function renderDash(){
-      const dados = getData();
-      // 1) Treinos por semana
+      // Treinos por semana
       const porSemana = {};
-      dados.forEach(a=>{
-        const key = weekKey(a.data);
-        porSemana[key] = (porSemana[key]||0)+1;
+      atividades.forEach(a=>{
+        const wk = weekKey(a.data);
+        porSemana[wk] = (porSemana[wk]||0)+1;
       });
-      const semLabels = Object.keys(porSemana).sort();
-      const semVals   = semLabels.map(k=>porSemana[k]);
+      const sLabels = Object.keys(porSemana).sort();
+      const sVals   = sLabels.map(k=>porSemana[k]);
 
-      // 2) Volume por grupo
+      // Volume por grupo
       const porGrupo = {};
-      dados.forEach(a=>{
-        const vol = calcVolume(a);
+      atividades.forEach(a=>{
+        const vol = Number(a.volume ?? calcVolume(a));
         porGrupo[a.grupo] = (porGrupo[a.grupo]||0) + vol;
       });
       const gLabels = Object.keys(porGrupo);
-      const gVals   = gLabels.map(k=> porGrupo[k]);
+      const gVals   = gLabels.map(k=>porGrupo[k]);
 
-      // 3) Estatísticas rápidas
-      const totalTreinos = dados.length;
-      const totalVolume  = sum(dados.map(calcVolume));
-      const ultimo = dados.slice().sort((a,b)=> a.data<b.data?1:-1)[0];
-      const statsDiv = document.getElementById("stats");
-      statsDiv.innerHTML = `
-        <div><b>Total de treinos:</b> ${totalTreinos}</div>
-        <div><b>Volume acumulado:</b> ${totalVolume.toFixed(1)} kg·reps</div>
+      // Stats
+      const total  = atividades.length;
+      const totalV = atividades.reduce((t,a)=> t + Number(a.volume ?? calcVolume(a)), 0);
+      const ultimo = atividades.slice().sort((a,b)=> a.data<b.data?1:-1)[0];
+      byId("stats").innerHTML = `
+        <div><b>Total de treinos:</b> ${total}</div>
+        <div><b>Volume acumulado:</b> ${totalV.toFixed(1)} kg·reps</div>
         ${ultimo ? `<div><b>Último treino:</b> ${fmtDate(ultimo.data)} · <span class="chip">${ultimo.grupo}</span></div>` : ""}
       `;
 
-      // charts
-      const ctxS = document.getElementById("chartSemanas").getContext("2d");
-      const ctxG = document.getElementById("chartGrupos").getContext("2d");
+      // Charts
+      const ctxS = byId("chartSemanas").getContext("2d");
+      const ctxG = byId("chartGrupos").getContext("2d");
       if(chSemanas) chSemanas.destroy();
-      if(chGrupos) chGrupos.destroy();
+      if(chGrupos)  chGrupos.destroy();
 
       chSemanas = new Chart(ctxS,{
         type:"bar",
-        data:{labels:semLabels,datasets:[{label:"Treinos/semana",data:semVals}]},
-        options:{responsive:true,scales:{y:{beginAtZero:true}}}
+        data:{ labels:sLabels, datasets:[{ label:"Treinos/semana", data:sVals }] },
+        options:{ responsive:true, scales:{ y:{ beginAtZero:true } } }
       });
       chGrupos = new Chart(ctxG,{
         type:"pie",
-        data:{labels:gLabels,datasets:[{label:"Volume (kg·reps)",data:gVals}]},
-        options:{responsive:true}
+        data:{ labels:gLabels, datasets:[{ label:"Volume (kg·reps)", data:gVals }] },
+        options:{ responsive:true }
       });
+
+      // Tendência por exercício
+      byId("btnFiltrar").onclick = ()=>{
+        const nome = (byId("filterEx").value||"").trim().toLowerCase();
+        const ordered = atividades.slice().sort((a,b)=> a.data>b.data?1:-1);
+        const labels=[], vol=[], maxLoad=[];
+        ordered.forEach(a=>{
+          let v=0, max=0;
+          (a.sets||[]).forEach(s=>{
+            if((s.exercicio||"").toLowerCase()===nome){
+              (s.series||[]).forEach(x=>{
+                v += (Number(x.reps)||0)*(Number(x.carga)||0);
+                if((Number(x.carga)||0)>max) max = Number(x.carga)||0;
+              });
+            }
+          });
+          if(v>0){ labels.push(fmtDate(a.data)); vol.push(v); maxLoad.push(max); }
+        });
+        const ctx = byId("chartExercicio").getContext("2d");
+        if(chEx) chEx.destroy();
+        chEx = new Chart(ctx,{
+          type:"line",
+          data:{ labels, datasets:[
+            {label:"Volume (kg·reps)",data:vol},
+            {label:"Carga máxima (kg)",data:maxLoad}
+          ]},
+          options:{ responsive:true, scales:{ y:{ beginAtZero:true } } }
+        });
+      };
     }
 
-    // Tendência de exercício específico
-    document.getElementById("btnFiltrar").onclick = ()=>{
-      const nome = (document.getElementById("filterEx").value || "").trim().toLowerCase();
-      const dados = getData().slice().sort((a,b)=> a.data>b.data?1:-1);
-      const labels=[], vol=[], maxLoad=[];
-      dados.forEach(a=>{
-        // filtra sets com esse exercício
-        let localVol = 0;
-        let maxSerie = 0;
-        a.sets.forEach(s=>{
-          if(s.exercicio.toLowerCase()===nome){
-            s.series.forEach(x=>{
-              localVol += (x.reps||0)*(x.carga||0);
-              if((x.carga||0)>maxSerie) maxSerie=x.carga||0;
-            });
-          }
-        });
-        if(localVol>0){
-          labels.push(fmtDate(a.data));
-          vol.push(localVol);
-          maxLoad.push(maxSerie);
-        }
-      });
-      const ctx = document.getElementById("chartExercicio").getContext("2d");
-      if(chEx) chEx.destroy();
-      chEx = new Chart(ctx,{
-        type:"line",
-        data:{labels,datasets:[
-          {label:"Volume (kg·reps)",data:vol},
-          {label:"Carga máxima (kg)",data:maxLoad}
-        ]},
-        options:{responsive:true,scales:{y:{beginAtZero:true}}}
-      });
-    };
-
-    // ---------- Backup / Restore ----------
-    document.getElementById("btnExport").onclick = ()=>{
-      const blob = new Blob([JSON.stringify(getData(),null,2)],{type:"application/json"});
+    /* ===========================
+       9) BACKUP / RESTORE
+       =========================== */
+    byId("btnExport").onclick = async ()=>{
+      if(!UID){ alert("Faça login."); return; }
+      const data = await fetchActivities();
+      const blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
       a.download = "treinos_backup.json";
       a.click();
       URL.revokeObjectURL(a.href);
     };
-    document.getElementById("btnImport").onclick = ()=> document.getElementById("importFile").click();
-    document.getElementById("importFile").addEventListener("change", (e)=>{
-      const f = e.target.files[0];
-      if(!f) return;
-      const reader = new FileReader();
-      reader.onload = ()=>{
-        try{
-          const arr = JSON.parse(reader.result);
-          if(Array.isArray(arr)){ setData(arr); renderHistorico(); renderDash(); alert("Dados importados!"); }
-          else alert("Arquivo inválido.");
-        }catch(err){ alert("Erro ao ler JSON."); }
-      };
-      reader.readAsText(f);
+    byId("importFile").addEventListener("change", async (e)=>{
+      if(!UID){ alert("Faça login."); e.target.value=""; return; }
+      const f=e.target.files[0]; if(!f) return;
+      try{
+        const text = await f.text();
+        const arr  = JSON.parse(text);
+        if(!Array.isArray(arr)) throw new Error("JSON inválido");
+        for(const a of arr){
+          const payload = {
+            data:a.data, fase:a.fase, grupo:a.grupo, sets:a.sets||[],
+            obs:a.obs||"", volume:Number(a.volume||0),
+            createdAt: serverTimestamp(), updatedAt: serverTimestamp()
+          };
+          await addActivity(payload);
+        }
+        await renderHistorico(); renderDash();
+        alert("Importação concluída!");
+      }catch(err){ alert("Erro ao importar JSON."); }
+      e.target.value="";
     });
-
-    // ---------- Inicialização ----------
-    renderHistorico(); renderDash();
   </script>
 </body>
 </html>
